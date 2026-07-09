@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, TrendingUp, Utensils } from "lucide-react";
-import foodCurry from "@/assets/food-curry-brisket.jpg";
-import foodBurger from "@/assets/food-burger-combo.jpg";
-import foodDesserts from "@/assets/food-desserts.jpg";
+import foodCurryAsset from "@/assets/food-curry-brisket.jpg.asset.json";
+import foodBurgerAsset from "@/assets/food-burger-combo.jpg.asset.json";
+import foodDessertsAsset from "@/assets/food-desserts.jpg.asset.json";
+const foodCurry = foodCurryAsset.url;
+const foodBurger = foodBurgerAsset.url;
+const foodDesserts = foodDessertsAsset.url;
+
 
 const banners = [
   {
