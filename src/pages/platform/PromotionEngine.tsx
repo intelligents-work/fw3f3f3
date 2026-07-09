@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePlatform } from "@/lib/platform/context";
 import { rankPromos } from "@/lib/platform/engine";
 import { segments } from "@/lib/platform/data";
-import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard } from "@/components/platform/primitives";
 import { Sparkles, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,20 +12,26 @@ export default function PromotionEngine() {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const selected = ranked[selectedIdx];
   const seg = segments.find(s => s.id === scenario.segmentId)!;
+  const top = ranked[0];
+  const launchFirst = top.sim.storeSuitability.filter(s => s.verdict === "Launch first").map(s => s.name).slice(0, 3).join(", ") || top.sim.storeSuitability.slice(0, 2).map(s => s.name).join(", ");
 
   const applySelected = () => setScenario({ promoType: selected.promo.id });
 
   return (
     <div className="space-y-5 animate-fade-in">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">Promotion Engine</h1>
-          <p className="text-sm text-muted-foreground">Ranked promo options for <span className="font-semibold text-foreground">{seg.name}</span> at {scenario.depth}% depth.</p>
-        </div>
-        <button onClick={applySelected} className="btn-fairwood text-sm">
-          <Check className="w-4 h-4 inline mr-1" /> Apply selected scenario
-        </button>
-      </div>
+      <PageHeader
+        eyebrow="Promotion Engine · Ranked Options"
+        title="Promotion Engine"
+        subtitle={`Ranked promo options for ${seg.name} at ${scenario.depth}% depth.`}
+        takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and HKD {top.sim.incremental}K incremental. Launch first in {launchFirst}.</>}
+        meta={<><RiskBadge risk={top.sim.risk} /><StatusChip tone="primary">Recommended</StatusChip></>}
+        action={
+          <button onClick={applySelected} className="btn-fairwood text-sm">
+            <Check className="w-4 h-4 inline mr-1" /> Apply selected
+          </button>
+        }
+      />
+
 
       {/* 3 ranked cards */}
       <div className="grid md:grid-cols-3 gap-4">
