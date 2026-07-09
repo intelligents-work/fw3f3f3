@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { usePlatform } from "@/lib/platform/context";
 import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
-import { presets, products, campaigns, stores, IMG } from "@/lib/platform/data";
+import { presets, products, stores, IMG } from "@/lib/platform/data";
 import { DollarSign, TrendingUp, Target, Percent, Shield, Zap, ArrowUpRight } from "lucide-react";
 
 export default function Dashboard() {
