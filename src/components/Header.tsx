@@ -1,6 +1,8 @@
 import { User, MessageCircle } from "lucide-react";
 import fairwoodLogo from "@/assets/fairwood-logo.png";
-import aiTranscendLogo from "@/assets/ai-transcend-logo.png.asset.json";
+import aiTranscendLogoAsset from "@/assets/ai-transcend-logo.png.asset.json";
+const aiTranscendLogo = aiTranscendLogoAsset.url;
+
 interface HeaderProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
