@@ -137,47 +137,23 @@ export default function Dashboard() {
         </section>
       </div>
 
-      {/* Activity feeds */}
-      <div className="grid lg:grid-cols-2 gap-5">
-        <section className="glass-card p-5">
-          <SectionHeader title="Campaign activity" action={<Link to="/campaigns"><CardLink>All campaigns</CardLink></Link>} />
-          <div className="space-y-3">
-            {campaigns.slice(0, 3).map(c => (
-              <div key={c.id} className="flex gap-3 p-2 rounded-lg hover:bg-muted/40 transition-colors">
-                <img src={c.image} alt={c.name} className="w-14 h-14 rounded-lg object-cover" loading="lazy" width={1024} height={1024} />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold truncate">{c.name}</span>
-                    <StatusChip tone={c.status === "live" ? "success" : "neutral"}>{c.status}</StatusChip>
-                  </div>
-                  <div className="text-xs text-muted-foreground truncate">{c.summary}</div>
-                  <div className="flex gap-3 mt-1 text-[11px]">
-                    <span className="font-semibold text-[hsl(145_63%_36%)]">+{c.uplift}% uplift</span>
-                    <span className="text-muted-foreground">HKD {c.incremental}K incremental</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="glass-card p-5">
-          <SectionHeader title="Recommendation feed" />
-          <div className="space-y-2">
-            {[
-              { chip: "primary", text: "Increase Weekend Family Set coverage from 60% → 80% of stores", icon: <Zap className="w-3.5 h-3.5" /> },
-              { chip: "info", text: "Tea Combo Upsell showing +18% uplift in Mong Kok — expand to Causeway Bay" },
-              { chip: "warning", text: "Hold Breakfast Value Push discount at 15% — margin quality declining above 18%" },
-              { chip: "success", text: "Hero Product Recovery ready for re-launch, 82% confidence" },
-            ].map((r, i) => (
-              <div key={i} className="flex items-start gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted/60 transition-colors">
-                <StatusChip tone={r.chip as any}>{r.chip === "primary" ? "Act now" : r.chip === "warning" ? "Monitor" : r.chip === "success" ? "Ready" : "Insight"}</StatusChip>
-                <span className="text-sm text-foreground flex-1">{r.text}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
+      {/* Management recommendation feed */}
+      <section className="glass-card p-5">
+        <SectionHeader title="Recommendation feed" subtitle="Prioritized actions for this week" />
+        <div className="grid md:grid-cols-2 gap-2">
+          {[
+            { chip: "primary", text: "Increase Weekend Family Set coverage from 60% → 80% of stores", icon: <Zap className="w-3.5 h-3.5" /> },
+            { chip: "info", text: "Tea Combo Upsell showing +18% uplift in Mong Kok — expand to Causeway Bay" },
+            { chip: "warning", text: "Hold Breakfast Value Push discount at 15% — margin quality softens above 18%" },
+            { chip: "success", text: "Hero Product Recovery ready for re-launch, 82% confidence" },
+          ].map((r, i) => (
+            <div key={i} className="flex items-start gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted/60 transition-colors">
+              <StatusChip tone={r.chip as any}>{r.chip === "primary" ? "Act now" : r.chip === "warning" ? "Monitor" : r.chip === "success" ? "Ready" : "Insight"}</StatusChip>
+              <span className="text-sm text-foreground flex-1">{r.text}</span>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
