@@ -3,36 +3,28 @@ import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, useSidebar,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, LineChart, Tags, Users, Megaphone, Store, GitCompare, Bot } from "lucide-react";
+import { LayoutDashboard, LineChart, Tags, Users, Store, GitCompare } from "lucide-react";
 import fairwoodLogo from "@/assets/fairwood-logo.png";
 
 const groups = [
   {
-    label: "Overview",
-    items: [{ title: "Live Overview", url: "/", icon: LayoutDashboard }],
+    label: "Executive",
+    items: [{ title: "Overview", url: "/", icon: LayoutDashboard }],
   },
   {
-    label: "Growth",
+    label: "Planning",
     items: [
-      { title: "Prediction", url: "/prediction", icon: LineChart },
-      { title: "Promotion Engine", url: "/promotions", icon: Tags },
+      { title: "Sales Prediction", url: "/prediction", icon: LineChart },
+      { title: "Promo Recommendation", url: "/promotions", icon: Tags },
       { title: "Decision Analysis", url: "/decisions", icon: GitCompare },
     ],
   },
   {
-    label: "Customers",
+    label: "Insights",
     items: [
       { title: "Segment Insights", url: "/segments", icon: Users },
-      { title: "Campaigns", url: "/campaigns", icon: Megaphone },
+      { title: "Store Performance", url: "/stores", icon: Store },
     ],
-  },
-  {
-    label: "Network",
-    items: [{ title: "Store Comparison", url: "/stores", icon: Store }],
-  },
-  {
-    label: "Assistant",
-    items: [{ title: "AI Insights", url: "/insights", icon: Bot }],
   },
 ];
 
@@ -49,7 +41,7 @@ export function AppSidebar() {
           {!collapsed && (
             <div className="flex flex-col leading-tight">
               <span className="text-[13px] font-bold text-foreground">Fairwood AI</span>
-              <span className="text-[10px] text-muted-foreground">Growth Platform</span>
+              <span className="text-[10px] text-muted-foreground">Decision Platform</span>
             </div>
           )}
         </div>
