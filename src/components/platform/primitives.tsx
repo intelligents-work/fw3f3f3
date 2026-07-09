@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { TrendingUp, TrendingDown, ArrowRight } from "lucide-react";
+import { TrendingUp, TrendingDown, ArrowRight, Sparkles } from "lucide-react";
 
 export function SectionHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: ReactNode }) {
   return (
@@ -10,6 +10,66 @@ export function SectionHeader({ title, subtitle, action }: { title: string; subt
         {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
       </div>
       {action}
+    </div>
+  );
+}
+
+/**
+ * PageHeader — branded page intro with a management takeaway.
+ * The takeaway is the visually dominant element (red side bar + key insight).
+ */
+export function PageHeader({
+  eyebrow, title, subtitle, takeaway, takeawayLabel = "Key takeaway", meta, action,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  takeaway: ReactNode;
+  takeawayLabel?: string;
+  meta?: ReactNode;
+  action?: ReactNode;
+}) {
+  return (
+    <header className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-[hsl(14_89%_97%)] border border-border shadow-card">
+      <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-primary to-[hsl(28_100%_54%)]" />
+      <div className="pl-5 pr-5 lg:pl-7 lg:pr-6 py-4 lg:py-5">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div className="min-w-0 flex-1">
+            {eyebrow && (
+              <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary mb-1">{eyebrow}</div>
+            )}
+            <h1 className="text-2xl lg:text-[26px] font-bold text-foreground leading-tight">{title}</h1>
+            {subtitle && <p className="text-sm text-muted-foreground mt-0.5">{subtitle}</p>}
+          </div>
+          {action && <div className="shrink-0">{action}</div>}
+        </div>
+
+        <div className="mt-3 flex items-stretch gap-0 rounded-xl overflow-hidden border border-primary/20 bg-white shadow-sm">
+          <div className="bg-primary text-primary-foreground px-3 py-2.5 flex items-center gap-1.5 shrink-0">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">{takeawayLabel}</span>
+          </div>
+          <div className="px-3.5 py-2.5 flex-1 flex items-center">
+            <p className="text-sm font-medium text-foreground leading-snug">{takeaway}</p>
+          </div>
+          {meta && <div className="px-3.5 py-2.5 border-l border-border flex items-center gap-2 shrink-0 bg-[hsl(30_20%_98%)]">{meta}</div>}
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/**
+ * PriorityCard — visually dominant card for the #1 recommendation / insight on a page.
+ */
+export function PriorityCard({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={cn(
+      "relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/[0.06] via-white to-[hsl(28_100%_54%/0.05)] border-2 border-primary/25 shadow-[0_8px_28px_-8px_hsl(14_89%_51%/0.25)]",
+      className,
+    )}>
+      <div className="absolute top-0 right-0 w-24 h-24 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
+      {children}
     </div>
   );
 }

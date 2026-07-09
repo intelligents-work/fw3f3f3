@@ -1,6 +1,7 @@
 import { ChatAssistant } from "@/components/ChatAssistant";
-import { SectionHeader, StatusChip } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, PageHeader } from "@/components/platform/primitives";
 import { Sparkles } from "lucide-react";
+import { usePlatform } from "@/lib/platform/context";
 
 const prompts = [
   "Why is this campaign recommended?",
@@ -19,12 +20,17 @@ const savedInsights = [
 ];
 
 export default function AIInsights() {
+  const { sim, scenario } = usePlatform();
   return (
     <div className="space-y-5 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-bold flex items-center gap-2"><Sparkles className="w-5 h-5 text-primary" /> AI Insights</h1>
-        <p className="text-sm text-muted-foreground">Ask the assistant to explain recommendations, compare options, and summarize for management.</p>
-      </div>
+      <PageHeader
+        eyebrow="AI Assistant · Management Insights"
+        title="AI Insights"
+        subtitle="Ask the assistant to explain recommendations, compare options, and summarize for management."
+        takeaway={<>Assistant is scoped to your current scenario — <b className="text-primary">{scenario.segmentId.replace("-", " ")}</b>, {scenario.promoType} at {scenario.depth}% depth, projecting <b className="text-primary">+{sim.uplift}% uplift</b>.</>}
+        meta={<StatusChip tone="primary"><Sparkles className="w-3 h-3" />Live context</StatusChip>}
+      />
+
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-5">
         <aside className="space-y-4">

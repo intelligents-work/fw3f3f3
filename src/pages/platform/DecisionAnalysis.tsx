@@ -1,7 +1,7 @@
 import { usePlatform } from "@/lib/platform/context";
 import { simulate } from "@/lib/platform/engine";
 import { segments, stores } from "@/lib/platform/data";
-import { SectionHeader, DriverBar, ConfidenceMeter, RiskBadge, StatusChip, KpiTile } from "@/components/platform/primitives";
+import { SectionHeader, DriverBar, ConfidenceMeter, RiskBadge, StatusChip, KpiTile, PageHeader, PriorityCard } from "@/components/platform/primitives";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis, LabelList } from "recharts";
@@ -13,7 +13,6 @@ export default function DecisionAnalysis() {
 
   const seg = segments.find(s => s.id === scenario.segmentId)!;
 
-  // sensitivity — try 5 depths
   const sensitivity = [5, 10, 15, 20, 25, 30].map(d => {
     const r = simulate({ ...scenario, depth: d });
     return { depth: d, uplift: r.uplift, incremental: r.incremental, confidence: r.confidence, margin: r.margin };
@@ -29,17 +28,20 @@ export default function DecisionAnalysis() {
 
   return (
     <div className="space-y-5 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-bold">Decision Analysis</h1>
-        <p className="text-sm text-muted-foreground">Why this recommendation, what changes if we adjust the scenario, and what management should do next.</p>
-      </div>
+      <PageHeader
+        eyebrow="Decision Support · Why This Recommendation"
+        title="Decision Analysis"
+        subtitle="Rationale, tradeoffs, and what changes if we adjust the scenario."
+        takeaway={<><b className="text-primary">Recommendation:</b> {sim.recommendation}</>}
+        meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{sim.confidence}% confidence</StatusChip></>}
+      />
 
-      {/* Recommendation rationale */}
-      <div className="glass-card p-6 bg-gradient-to-br from-primary/8 via-primary/3 to-transparent border border-primary/20">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
+      {/* Recommendation rationale — PRIORITY */}
+      <PriorityCard className="p-6">
+        <div className="flex items-start justify-between gap-4 flex-wrap relative">
           <div className="flex-1 min-w-[280px]">
             <StatusChip tone="primary">Management summary</StatusChip>
-            <h2 className="text-xl font-bold mt-2 leading-snug">{sim.recommendation}</h2>
+            <h2 className="text-xl font-bold mt-2 leading-snug text-foreground">{sim.recommendation}</h2>
             <p className="text-sm text-foreground/85 mt-2 leading-relaxed">{sim.explanation}</p>
           </div>
           <div className="w-full lg:w-64 space-y-2.5">
@@ -48,7 +50,8 @@ export default function DecisionAnalysis() {
             <div className="flex gap-2"><RiskBadge risk={sim.risk} /><StatusChip tone="neutral">{seg.name}</StatusChip></div>
           </div>
         </div>
-      </div>
+      </PriorityCard>
+
 
       <div className="grid lg:grid-cols-3 gap-5">
         {/* Drivers */}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { campaigns, type CampaignDef } from "@/lib/platform/data";
-import { SectionHeader, StatusChip, ConfidenceMeter, KpiTile } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, ConfidenceMeter, KpiTile, PageHeader } from "@/components/platform/primitives";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +11,8 @@ export default function Campaigns() {
   const [selectedId, setSelectedId] = useState(campaigns[0].id);
   const list = campaigns.filter(c => filter === "All" ? true : c.status === filter.toLowerCase());
   const selected = campaigns.find(c => c.id === selectedId) as CampaignDef;
+  const bestLive = campaigns.filter(c => c.status === "live").sort((a,b) => b.incremental - a.incremental)[0] ?? campaigns[0];
 
-  // synthetic before/after series
   const series = Array.from({ length: 14 }, (_, i) => {
     const day = i + 1;
     const base = 60 + Math.sin(i * 0.7) * 8;
@@ -22,19 +22,23 @@ export default function Campaigns() {
 
   return (
     <div className="space-y-5 animate-fade-in">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">Campaign Performance</h1>
-          <p className="text-sm text-muted-foreground">Live and recent campaigns with uplift, incremental revenue, and management summary.</p>
-        </div>
-        <div className="flex gap-1 bg-muted/50 p-1 rounded-full">
-          {filters.map(f => (
-            <button key={f} onClick={() => setFilter(f)}
-              className={cn("px-3 py-1.5 rounded-full text-xs font-medium transition-all",
-                filter === f ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>{f}</button>
-          ))}
-        </div>
-      </div>
+      <PageHeader
+        eyebrow="Campaign Performance · Review"
+        title="Campaign Performance"
+        subtitle="Live and recent campaigns with uplift, incremental revenue, and management summary."
+        takeaway={<><b className="text-primary">{bestLive.name}</b> is the top live performer at <b className="text-primary">+{bestLive.uplift}%</b> uplift and HKD {bestLive.incremental}K incremental across {bestLive.storeCoverage}% of stores.</>}
+        meta={<><StatusChip tone="success">{campaigns.filter(c => c.status === "live").length} live</StatusChip><StatusChip tone="neutral">{campaigns.length} total</StatusChip></>}
+        action={
+          <div className="flex gap-1 bg-muted/60 p-1 rounded-full">
+            {filters.map(f => (
+              <button key={f} onClick={() => setFilter(f)}
+                className={cn("px-3 py-1.5 rounded-full text-xs font-semibold transition-all",
+                  filter === f ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>{f}</button>
+            ))}
+          </div>
+        }
+      />
+
 
       <div className="grid lg:grid-cols-[1fr_1.4fr] gap-5">
         {/* Cards list */}

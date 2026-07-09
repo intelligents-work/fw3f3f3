@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePlatform } from "@/lib/platform/context";
-import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
 import { presets, products, campaigns, stores, IMG } from "@/lib/platform/data";
 import { DollarSign, TrendingUp, Target, Percent, Shield, Zap, ArrowUpRight } from "lucide-react";
 
@@ -75,13 +75,13 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Active Recommendation */}
-        <section className="glass-card p-5 flex flex-col">
+        {/* Active Recommendation — PRIORITY */}
+        <PriorityCard className="p-5 flex flex-col">
           <SectionHeader title="Active recommendation" />
           <div className="space-y-3 flex-1">
-            <div className="p-3 rounded-lg bg-primary/5 border border-primary/15">
-              <div className="text-xs font-semibold text-primary uppercase tracking-wide">Recommended action</div>
-              <p className="text-sm text-foreground mt-1 leading-snug">{sim.recommendation}</p>
+            <div className="p-3 rounded-lg bg-primary/10 border border-primary/25 shadow-sm">
+              <div className="text-[10px] font-bold text-primary uppercase tracking-wider">Recommended action</div>
+              <p className="text-sm font-medium text-foreground mt-1 leading-snug">{sim.recommendation}</p>
             </div>
             <ConfidenceMeter value={sim.confidence} />
             <ConfidenceMeter value={sim.margin} label="Margin quality" />
@@ -92,8 +92,9 @@ export default function Dashboard() {
             </div>
           </div>
           <Link to="/decisions" className="mt-3"><CardLink>See rationale</CardLink></Link>
-        </section>
+        </PriorityCard>
       </div>
+
 
       {/* Top products + Store snapshot */}
       <div className="grid lg:grid-cols-3 gap-5">

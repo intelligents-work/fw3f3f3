@@ -1,6 +1,6 @@
 import { usePlatform } from "@/lib/platform/context";
 import { presets, promos, segments, stores } from "@/lib/platform/data";
-import { KpiTile, SectionHeader, ConfidenceMeter, DriverBar, RiskBadge, StatusChip } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, ConfidenceMeter, DriverBar, RiskBadge, StatusChip, PageHeader } from "@/components/platform/primitives";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -8,24 +8,29 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, R
 
 export default function Prediction() {
   const { scenario, setScenario, applyPreset, sim } = usePlatform();
+  const seg = segments.find(s => s.id === scenario.segmentId)!;
 
   return (
     <div className="space-y-5 animate-fade-in">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Prediction</h1>
-          <p className="text-sm text-muted-foreground">Scenario simulator — adjust levers to see projected sales, uplift, and risk.</p>
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {presets.map(p => (
-            <button key={p.id}
-              onClick={() => applyPreset({ segmentId: p.segment, promoType: p.promo, depth: p.depth, horizon: p.horizon, weather: p.weather, holiday: p.holiday, pressure: p.pressure })}
-              className="px-2.5 py-1 rounded-full text-xs font-medium bg-white border border-border hover:border-primary hover:text-primary transition-colors">
-              {p.name}
-            </button>
-          ))}
-        </div>
-      </div>
+      <PageHeader
+        eyebrow="Forecast · Scenario Simulator"
+        title="Prediction"
+        subtitle="Adjust levers to see projected sales, uplift, and risk in real time."
+        takeaway={<>Current scenario projects <b className="text-primary">+{sim.uplift}% uplift</b> and <b className="text-primary">HKD {sim.incremental}K incremental</b> over {scenario.horizon} days — confidence {sim.confidence}%, {sim.risk.toLowerCase()} risk.</>}
+        meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{seg.name}</StatusChip></>}
+        action={
+          <div className="hidden md:flex flex-wrap gap-1.5 max-w-md justify-end">
+            {presets.slice(0, 4).map(p => (
+              <button key={p.id}
+                onClick={() => applyPreset({ segmentId: p.segment, promoType: p.promo, depth: p.depth, horizon: p.horizon, weather: p.weather, holiday: p.holiday, pressure: p.pressure })}
+                className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-white border border-border hover:border-primary hover:text-primary transition-colors">
+                {p.name}
+              </button>
+            ))}
+          </div>
+        }
+      />
+
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <KpiTile tone="primary" label="Predicted weekly" value={`HKD ${(sim.predictedWeekly/1000).toFixed(0)}K`} delta={sim.uplift} />

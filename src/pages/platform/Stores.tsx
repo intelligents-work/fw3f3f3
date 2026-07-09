@@ -1,6 +1,6 @@
 import { stores } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, VerdictChip } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, VerdictChip, PageHeader } from "@/components/platform/primitives";
 import { cn } from "@/lib/utils";
 
 const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number) => string }[] = [
@@ -20,18 +20,23 @@ function heatCell(value: number) {
 export default function Stores() {
   const { sim } = usePlatform();
 
-  // Merge suitability verdict with base stores
   const rows = stores.map(s => {
     const suit = sim.storeSuitability.find(x => x.storeId === s.id)!;
     return { ...s, score: suit.score, verdict: suit.verdict };
   }).sort((a, b) => b.score - a.score);
 
+  const launchFirst = rows.filter(r => r.verdict === "Launch first").map(r => r.name).join(", ") || rows[0].name;
+
   return (
     <div className="space-y-5 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-bold">Store Comparison</h1>
-        <p className="text-sm text-muted-foreground">Cluster leaderboard, comparative KPIs, and launch guidance for the current scenario.</p>
-      </div>
+      <PageHeader
+        eyebrow="Network · Store Comparison"
+        title="Store Comparison"
+        subtitle="Cluster leaderboard, comparative KPIs, and launch guidance for the current scenario."
+        takeaway={<><b className="text-primary">Launch first in {launchFirst}</b> — highest fit for the current scenario. Monitor 5 days, then scale to test-next clusters.</>}
+        meta={<><StatusChip tone="success">{rows.filter(r => r.verdict === "Launch first").length} launch</StatusChip><StatusChip tone="info">{rows.filter(r => r.verdict === "Test next").length} test</StatusChip></>}
+      />
+
 
       {/* Leaderboard */}
       <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">

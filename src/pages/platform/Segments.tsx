@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { segments, type SegmentDef } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, ConfidenceMeter } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader } from "@/components/platform/primitives";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { cn } from "@/lib/utils";
 
@@ -16,12 +16,18 @@ export default function Segments() {
     aov: s.aovBias,
   }));
 
+  const topSeg = [...segments].sort((a,b) => (b.discountSensitivity + b.bundleAffinity) - (a.discountSensitivity + a.bundleAffinity))[0];
+
   return (
     <div className="space-y-5 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-bold">Segment Insights</h1>
-        <p className="text-sm text-muted-foreground">Understand each segment's behavior and offer response potential.</p>
-      </div>
+      <PageHeader
+        eyebrow="Customer Intelligence · Segments"
+        title="Segment Insights"
+        subtitle="Understand each segment's behavior and offer response potential."
+        takeaway={<><b className="text-primary">{topSeg.name}</b> shows the highest response potential — best served with {topSeg.offerStyle.toLowerCase()} during {topSeg.preferredDaypart.toLowerCase()}.</>}
+        meta={<StatusChip tone="primary">{segments.length} segments tracked</StatusChip>}
+      />
+
 
       <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-3">
         {segments.map(s => (
