@@ -20,9 +20,9 @@ export default function PromotionEngine() {
   return (
     <div className="space-y-5 animate-fade-in">
       <PageHeader
-        eyebrow="Promotion Engine · Ranked Options"
-        title="Promotion Engine"
-        subtitle={`Ranked promo options for ${seg.name} at ${scenario.depth}% depth.`}
+        eyebrow="Planning · Ranked Options"
+        title="Promo Recommendation"
+        subtitle={`Ranked promotion options for ${seg.name} at ${scenario.depth}% depth. Demo simulation.`}
         takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and HKD {top.sim.incremental}K incremental. Launch first in {launchFirst}.</>}
         meta={<><RiskBadge risk={top.sim.risk} /><StatusChip tone="primary">Recommended</StatusChip></>}
         action={

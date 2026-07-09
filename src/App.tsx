@@ -8,10 +8,8 @@ import Dashboard from "./pages/platform/Dashboard";
 import Prediction from "./pages/platform/Prediction";
 import PromotionEngine from "./pages/platform/PromotionEngine";
 import Segments from "./pages/platform/Segments";
-import Campaigns from "./pages/platform/Campaigns";
 import Stores from "./pages/platform/Stores";
 import DecisionAnalysis from "./pages/platform/DecisionAnalysis";
-import AIInsights from "./pages/platform/AIInsights";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,10 +26,8 @@ const App = () => (
             <Route path="/prediction" element={<Prediction />} />
             <Route path="/promotions" element={<PromotionEngine />} />
             <Route path="/segments" element={<Segments />} />
-            <Route path="/campaigns" element={<Campaigns />} />
             <Route path="/stores" element={<Stores />} />
             <Route path="/decisions" element={<DecisionAnalysis />} />
-            <Route path="/insights" element={<AIInsights />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

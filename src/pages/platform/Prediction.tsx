@@ -13,9 +13,9 @@ export default function Prediction() {
   return (
     <div className="space-y-5 animate-fade-in">
       <PageHeader
-        eyebrow="Forecast · Scenario Simulator"
-        title="Prediction"
-        subtitle="Adjust levers to see projected sales, uplift, and risk in real time."
+        eyebrow="Planning · Scenario Simulator"
+        title="Sales Prediction"
+        subtitle="Adjust levers to see projected sales, uplift, and risk in real time. Demo simulation."
         takeaway={<>Current scenario projects <b className="text-primary">+{sim.uplift}% uplift</b> and <b className="text-primary">HKD {sim.incremental}K incremental</b> over {scenario.horizon} days — confidence {sim.confidence}%, {sim.risk.toLowerCase()} risk.</>}
         meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{seg.name}</StatusChip></>}
         action={
