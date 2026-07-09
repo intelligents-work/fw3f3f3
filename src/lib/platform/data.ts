@@ -1,11 +1,11 @@
 // Fairwood AI Platform — mock master data (demo only)
-import burger from "@/assets/food-burger-combo.jpg";
-import curry from "@/assets/food-curry-brisket.jpg";
-import desserts from "@/assets/food-desserts.jpg";
-import breakfast from "@/assets/food-breakfast-set.jpg";
-import teaCombo from "@/assets/food-tea-combo.jpg";
-import family from "@/assets/food-family-set.jpg";
-import signature from "@/assets/food-signature-rice.jpg";
+import burger from "@/assets/food-burger-combo.jpg.asset.json";
+import curry from "@/assets/food-curry-brisket.jpg.asset.json";
+import desserts from "@/assets/food-desserts.jpg.asset.json";
+import breakfast from "@/assets/food-breakfast-set.jpg.asset.json";
+import teaCombo from "@/assets/food-tea-combo.jpg.asset.json";
+import family from "@/assets/food-family-set.jpg.asset.json";
+import signature from "@/assets/food-signature-rice.jpg.asset.json";
 
 export const IMG = { burger, curry, desserts, breakfast, teaCombo, family, signature };
 
