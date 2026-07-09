@@ -1,13 +1,22 @@
 // Fairwood AI Platform — mock master data (demo only)
-import burger from "@/assets/food-burger-combo.jpg.asset.json";
-import curry from "@/assets/food-curry-brisket.jpg.asset.json";
-import desserts from "@/assets/food-desserts.jpg.asset.json";
-import breakfast from "@/assets/food-breakfast-set.jpg.asset.json";
-import teaCombo from "@/assets/food-tea-combo.jpg.asset.json";
-import family from "@/assets/food-family-set.jpg.asset.json";
-import signature from "@/assets/food-signature-rice.jpg.asset.json";
+import burgerAsset from "@/assets/food-burger-combo.jpg.asset.json";
+import curryAsset from "@/assets/food-curry-brisket.jpg.asset.json";
+import dessertsAsset from "@/assets/food-desserts.jpg.asset.json";
+import breakfastAsset from "@/assets/food-breakfast-set.jpg.asset.json";
+import teaComboAsset from "@/assets/food-tea-combo.jpg.asset.json";
+import familyAsset from "@/assets/food-family-set.jpg.asset.json";
+import signatureAsset from "@/assets/food-signature-rice.jpg.asset.json";
+
+const burger = burgerAsset.url;
+const curry = curryAsset.url;
+const desserts = dessertsAsset.url;
+const breakfast = breakfastAsset.url;
+const teaCombo = teaComboAsset.url;
+const family = familyAsset.url;
+const signature = signatureAsset.url;
 
 export const IMG = { burger, curry, desserts, breakfast, teaCombo, family, signature };
+
 
 export type StoreId =
   | "sha-tin" | "mong-kok" | "causeway-bay" | "tsuen-wan" | "tseung-kwan-o";
