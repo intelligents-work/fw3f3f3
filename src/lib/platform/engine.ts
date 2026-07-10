@@ -125,18 +125,18 @@ export function simulate(s: Scenario): Simulation {
     return { id: sg.id, name: sg.name, score: Math.min(100, score) };
   }).sort((a, b) => b.score - a.score);
 
-  const explanation =
-    `${promo.name} at ${s.depth}% is a ${risk.toLowerCase()}-risk move for ${seg.name}. ` +
-    `Expected uplift ${upliftPct.toFixed(1)}% with ${Math.round(confidence)}% confidence over the next ${s.horizon} days. ` +
-    (risk === "High"
-      ? `Discount depth is eroding margin quality — hold depth or pair with a hero bundle.`
-      : risk === "Medium"
-        ? `Balanced trade-off between reach and margin — good candidate to test in launch-first stores.`
-        : `Low risk with steady incremental — safe to roll out to launch-first cluster now.`);
-
   const bestStore = storeSuitability[0].name;
+  const secondStore = storeSuitability[1].name;
+  const caveat =
+    risk === "High"
+      ? `the ${s.depth}% depth is squeezing margin quality, so cap depth or anchor on a hero bundle`
+      : risk === "Medium"
+        ? `margin is thinner than ideal at ${s.depth}%, so keep the pilot tight before scaling`
+        : `risk is contained at ${s.depth}% depth, giving a clean read on true uplift`;
+  const explanation =
+    `${promo.name} targeted at ${seg.name} is expected to lift sales ~${upliftPct.toFixed(1)}% over ${s.horizon} days at ${Math.round(confidence)}% confidence, led by the ${bestStore} cluster. Caveat: ${caveat}.`;
   const recommendation =
-    `Launch in ${bestStore} + ${storeSuitability[1].name} first, monitor 5 days, then expand to test-next cluster.`;
+    `Launch in ${bestStore} and ${secondStore} first for a 5-day read, then extend to the test-next cluster if uplift holds above ${Math.max(2, Math.round(upliftPct * 0.6))}%.`;
 
   return {
     baselineWeekly: Math.round(baseline),

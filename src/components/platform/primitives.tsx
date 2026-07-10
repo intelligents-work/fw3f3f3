@@ -1,6 +1,23 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { TrendingUp, TrendingDown, ArrowRight, Sparkles } from "lucide-react";
+import { TrendingUp, TrendingDown, ArrowRight, Sparkles, FlaskConical } from "lucide-react";
+
+/**
+ * DemoTag — tiny inline marker to clarify every calculated number is illustrative.
+ */
+export function DemoTag({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold uppercase tracking-wider bg-muted text-muted-foreground ring-1 ring-border align-middle",
+        className,
+      )}
+      title="Illustrative figure — deterministic demo calculation"
+    >
+      <FlaskConical className="w-2.5 h-2.5" /> Demo
+    </span>
+  );
+}
 
 export function SectionHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: ReactNode }) {
   return (

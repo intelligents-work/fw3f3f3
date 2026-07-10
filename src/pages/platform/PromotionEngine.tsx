@@ -2,8 +2,8 @@ import { useState } from "react";
 import { usePlatform } from "@/lib/platform/context";
 import { rankPromos } from "@/lib/platform/engine";
 import { segments } from "@/lib/platform/data";
-import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard } from "@/components/platform/primitives";
-import { Sparkles, Check } from "lucide-react";
+import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard, DemoTag } from "@/components/platform/primitives";
+import { Sparkles, Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function PromotionEngine() {
@@ -33,50 +33,74 @@ export default function PromotionEngine() {
       />
 
 
-      {/* 3 ranked cards */}
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-primary/5 border border-primary/15 text-xs text-foreground">
+        <Info className="w-3.5 h-3.5 text-primary shrink-0" />
+        <span><b className="text-primary">Phase 1 POC</b> — validate on launch-first stores before wider rollout.</span>
+      </div>
+
+      {/* Ranked cards — #1 is visually dominant */}
+      <div className="grid md:grid-cols-5 gap-4">
         {ranked.map((r, i) => {
           const active = i === selectedIdx;
+          const isTop = i === 0;
+          const Wrap: any = isTop ? PriorityCard : "div";
           return (
             <button key={r.promo.id} onClick={() => setSelectedIdx(i)}
               className={cn(
-                "text-left rounded-2xl overflow-hidden bg-card border-2 transition-all",
-                active ? "border-primary shadow-card-hover ring-4 ring-primary/10" : "border-transparent shadow-card hover:shadow-card-hover"
+                "text-left transition-all",
+                isTop ? "md:col-span-3" : "md:col-span-1",
               )}>
-              <div className="relative h-32 overflow-hidden">
-                <img src={r.promo.hero} alt={r.promo.name} className="w-full h-full object-cover" loading="lazy" width={1024} height={1024} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute top-2 left-2 flex gap-1.5">
-                  {i === 0 && <StatusChip tone="primary"><Sparkles className="w-3 h-3" />Recommended</StatusChip>}
-                  {i === 1 && <StatusChip tone="info">Alt A</StatusChip>}
-                  {i === 2 && <StatusChip tone="neutral">Alt B</StatusChip>}
-                </div>
-                <div className="absolute bottom-2 left-3 text-white">
-                  <div className="text-xs opacity-90">#{i + 1}</div>
-                  <div className="text-lg font-bold leading-tight">{r.promo.name}</div>
-                </div>
-              </div>
-              <div className="p-4 space-y-3">
-                <p className="text-xs text-muted-foreground">{r.promo.description}</p>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-2 rounded-lg bg-muted/50">
-                    <div className="text-muted-foreground">Uplift</div>
-                    <div className="text-lg font-bold text-[hsl(145_63%_36%)]">+{r.sim.uplift}%</div>
+              <Wrap className={cn(
+                "rounded-2xl overflow-hidden bg-card border-2 h-full",
+                isTop
+                  ? active
+                    ? "border-primary shadow-[0_16px_44px_-12px_hsl(14_89%_51%/0.4)] ring-4 ring-primary/15"
+                    : "border-primary/60 shadow-[0_12px_36px_-12px_hsl(14_89%_51%/0.32)]"
+                  : active
+                    ? "border-primary shadow-card-hover ring-2 ring-primary/10"
+                    : "border-transparent shadow-card hover:shadow-card-hover",
+              )}>
+                <div className={cn("relative overflow-hidden", isTop ? "h-48" : "h-28")}>
+                  <img src={r.promo.hero} alt={r.promo.name} className="w-full h-full object-cover" loading="lazy" width={1024} height={1024} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute top-2 left-2 flex gap-1.5">
+                    {i === 0 && <StatusChip tone="primary"><Sparkles className="w-3 h-3" />Recommended</StatusChip>}
+                    {i === 1 && <StatusChip tone="info">Alt A</StatusChip>}
+                    {i === 2 && <StatusChip tone="neutral">Alt B</StatusChip>}
                   </div>
-                  <div className="p-2 rounded-lg bg-muted/50">
-                    <div className="text-muted-foreground">Incremental</div>
-                    <div className="text-lg font-bold text-primary">HKD {r.sim.incremental}K</div>
+                  <div className="absolute bottom-2 left-3 text-white">
+                    <div className="text-xs opacity-90">#{i + 1}</div>
+                    <div className={cn("font-bold leading-tight", isTop ? "text-2xl" : "text-base")}>{r.promo.name}</div>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <ConfidenceMeter value={r.sim.confidence} />
-                  <ConfidenceMeter value={r.sim.margin} label="Margin" />
+                <div className={cn("space-y-3", isTop ? "p-5" : "p-3")}>
+                  <p className={cn("text-muted-foreground", isTop ? "text-sm" : "text-[11px] line-clamp-2")}>{r.promo.description}</p>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className={cn("rounded-lg", isTop ? "p-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 bg-muted/50")}>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Uplift</span>
+                        <DemoTag />
+                      </div>
+                      <div className={cn("font-bold text-[hsl(145_63%_36%)] tabular-nums", isTop ? "text-2xl" : "text-lg")}>+{r.sim.uplift}%</div>
+                    </div>
+                    <div className={cn("rounded-lg", isTop ? "p-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 bg-muted/50")}>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Incremental</span>
+                        <DemoTag />
+                      </div>
+                      <div className={cn("font-bold text-primary tabular-nums", isTop ? "text-2xl" : "text-lg")}>HKD {r.sim.incremental}K</div>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <ConfidenceMeter value={r.sim.confidence} />
+                    <ConfidenceMeter value={r.sim.margin} label="Margin" />
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <RiskBadge risk={r.sim.risk} />
+                    <StatusChip tone="neutral">Target: {seg.name}</StatusChip>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <RiskBadge risk={r.sim.risk} />
-                  <StatusChip tone="neutral">Target: {seg.name}</StatusChip>
-                </div>
-              </div>
+              </Wrap>
             </button>
           );
         })}

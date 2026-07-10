@@ -1,6 +1,6 @@
 import { stores } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, VerdictChip, PageHeader } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, VerdictChip, PageHeader, DemoTag } from "@/components/platform/primitives";
 import { cn } from "@/lib/utils";
 
 const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number) => string }[] = [
@@ -13,8 +13,10 @@ const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number
 
 function heatCell(value: number) {
   const pct = Math.min(100, Math.max(0, value));
-  const alpha = (pct / 100) * 0.75 + 0.1;
-  return `hsl(14 89% 51% / ${alpha})`;
+  // Widened alpha range for stronger contrast between low, mid, and high cells.
+  // Low ≈ 0.04, mid ≈ 0.45, high ≈ 0.95 (was 0.1 → 0.85).
+  const alpha = Math.pow(pct / 100, 1.15) * 0.91 + 0.04;
+  return `hsl(14 89% 51% / ${alpha.toFixed(3)})`;
 }
 
 export default function Stores() {
@@ -39,6 +41,10 @@ export default function Stores() {
 
 
       {/* Leaderboard */}
+      <div className="flex items-center justify-between">
+        <SectionHeader title="Cluster leaderboard" subtitle="Fit score for the current scenario" />
+        <DemoTag />
+      </div>
       <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
         {rows.map((r, i) => (
           <div key={r.id} className={cn("glass-card p-4 relative overflow-hidden",
@@ -52,6 +58,7 @@ export default function Stores() {
             <div className="mt-3 flex items-baseline gap-2">
               <span className="text-2xl font-bold text-primary tabular-nums">{r.score}</span>
               <span className="text-[11px] text-muted-foreground">fit score</span>
+              <DemoTag className="ml-auto" />
             </div>
             <div className="mt-2 text-[11px] text-muted-foreground">AOV HKD {r.aov.toFixed(1)} · {(r.weeklyOrders / 1000).toFixed(1)}K/wk</div>
           </div>
@@ -60,7 +67,11 @@ export default function Stores() {
 
       {/* Heatmap */}
       <div className="glass-card p-5">
-        <SectionHeader title="Comparative KPIs" subtitle="Deeper red = higher relative index" />
+        <SectionHeader
+          title="Comparative KPIs"
+          subtitle="Deeper red = higher relative index"
+          action={<DemoTag />}
+        />
         <div className="overflow-x-auto">
           <table className="w-full text-sm min-w-[640px]">
             <thead>

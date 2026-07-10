@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { segments, type SegmentDef } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader } from "@/components/platform/primitives";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader, DemoTag } from "@/components/platform/primitives";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from "recharts";
 import { cn } from "@/lib/utils";
 
 export default function Segments() {
@@ -24,7 +24,7 @@ export default function Segments() {
         eyebrow="Segment opportunity"
         title="Segment Insights"
         subtitle="Which customer segments and dayparts respond best to which promotions. Demo simulation."
-        takeaway={<><b className="text-primary">{topSeg.name}</b> shows the highest response potential — best served with {topSeg.offerStyle.toLowerCase()} during {topSeg.preferredDaypart.toLowerCase()}.</>}
+        takeaway={<><b className="text-primary">{topSeg.name}</b> — top responder at {topSeg.preferredDaypart.toLowerCase()}.</>}
         meta={<StatusChip tone="primary">{segments.length} segments tracked</StatusChip>}
       />
 
@@ -67,6 +67,10 @@ export default function Segments() {
 
           <div className="grid grid-cols-2 gap-4 mt-5">
             <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-muted-foreground uppercase">Response signals</span>
+                <DemoTag />
+              </div>
               <ConfidenceMeter value={pick.discountSensitivity} label="Discount sensitivity" />
               <ConfidenceMeter value={pick.bundleAffinity} label="Bundle affinity" />
               <ConfidenceMeter value={pick.aovBias > 100 ? Math.min(100, pick.aovBias) : pick.aovBias} label="AOV bias index" />
@@ -86,15 +90,17 @@ export default function Segments() {
         </div>
 
         <div className="glass-card p-5">
-          <SectionHeader title="Response comparison" subtitle="Response index by segment" />
+          <SectionHeader title="Response comparison" subtitle="Response index by segment" action={<DemoTag />} />
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={compareData} layout="vertical">
+              <BarChart data={compareData} layout="vertical" margin={{ right: 32 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" horizontal={false} />
-                <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={11} domain={[0, 100]} />
                 <YAxis dataKey="name" type="category" width={70} stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} />
                 <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12 }} />
-                <Bar dataKey="response" fill="hsl(var(--primary))" radius={[0, 6, 6, 0]} barSize={16} />
+                <Bar dataKey="response" fill="hsl(var(--primary))" radius={[0, 6, 6, 0]} barSize={16}>
+                  <LabelList dataKey="response" position="right" fill="hsl(var(--foreground))" fontSize={11} fontWeight={600} formatter={(v: number) => `${v}`} />
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
