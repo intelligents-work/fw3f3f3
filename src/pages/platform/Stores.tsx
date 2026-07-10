@@ -30,9 +30,9 @@ export default function Stores() {
   return (
     <div className="space-y-5 animate-fade-in">
       <PageHeader
-        eyebrow="Insights · Rollout Prioritization"
-        title="Store Performance"
-        subtitle="Cluster leaderboard and where to launch first for the current scenario. Demo simulation."
+        eyebrow="Rollout prioritization"
+        title="Store & Cluster Rollout"
+        subtitle="Where to launch first, test next, or hold as we scale the current recommendation. Demo simulation."
         takeaway={<><b className="text-primary">Launch first in {launchFirst}</b> — highest fit for the current scenario. Monitor 5 days, then scale to test-next clusters.</>}
         meta={<><StatusChip tone="success">{rows.filter(r => r.verdict === "Launch first").length} launch</StatusChip><StatusChip tone="info">{rows.filter(r => r.verdict === "Test next").length} test</StatusChip></>}
       />

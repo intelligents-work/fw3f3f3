@@ -29,9 +29,9 @@ export default function DecisionAnalysis() {
   return (
     <div className="space-y-5 animate-fade-in">
       <PageHeader
-        eyebrow="Decision Support · Why This Recommendation"
+        eyebrow="Decision support"
         title="Decision Analysis"
-        subtitle="Rationale, tradeoffs, and what changes if we adjust the scenario. Demo simulation."
+        subtitle="Why this recommendation is strong, and what changes if we adjust the plan. Demo simulation."
         takeaway={<><b className="text-primary">Recommendation:</b> {sim.recommendation}</>}
         meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{sim.confidence}% confidence</StatusChip></>}
       />
