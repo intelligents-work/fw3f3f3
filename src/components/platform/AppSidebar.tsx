@@ -23,7 +23,7 @@ const groups = [
     label: "Insights",
     items: [
       { title: "Segment Insights", url: "/segments", icon: Users },
-      { title: "Store Performance", url: "/stores", icon: Store },
+      { title: "Store Rollout", url: "/stores", icon: Store },
     ],
   },
 ];

@@ -1,58 +1,68 @@
 import { Link } from "react-router-dom";
 import { usePlatform } from "@/lib/platform/context";
 import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
-import { presets, products, stores, IMG } from "@/lib/platform/data";
-import { DollarSign, TrendingUp, Target, Percent, Shield, Zap, ArrowUpRight } from "lucide-react";
+import { presets, products, IMG } from "@/lib/platform/data";
+import { DollarSign, TrendingUp, Target, ArrowUpRight, Sparkles, ShieldCheck } from "lucide-react";
 
 export default function Dashboard() {
   const { sim, scenario, applyPreset } = usePlatform();
   const topOps = presets.slice(0, 3);
 
   return (
-    <div className="space-y-5 animate-fade-in">
-      {/* Hero commercial banner */}
+    <div className="space-y-6 animate-fade-in">
+      {/* Executive summary hero — biggest opportunity + recommended action */}
       <section className="relative overflow-hidden rounded-2xl shadow-card">
-        <div className="grid md:grid-cols-[1.4fr_1fr] gap-0">
+        <div className="grid md:grid-cols-[1.55fr_1fr] gap-0">
           <div className="p-6 lg:p-8 bg-gradient-to-br from-primary via-primary to-[hsl(8_85%_44%)] text-primary-foreground relative">
-            <StatusChip tone="warning">Active recommendation</StatusChip>
-            <h1 className="text-2xl lg:text-3xl font-bold mt-3 leading-tight">
-              Weekend Family Set is your biggest revenue opportunity this week
+            <div className="flex items-center gap-2">
+              <StatusChip tone="warning">This week's priority</StatusChip>
+              <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider opacity-90">
+                <Sparkles className="w-3 h-3" /> Demo simulation
+              </span>
+            </div>
+            <h1 className="text-[26px] lg:text-4xl font-bold mt-3 leading-[1.15]">
+              Weekend Family Set is Fairwood's biggest revenue opportunity this week
             </h1>
-            <p className="mt-2 text-sm opacity-95 max-w-xl">
-              Family Dinner segment × Bundle at 14% depth projects +HKD 412K incremental across 4 clusters with high margin quality.
+            <p className="mt-3 text-[15px] opacity-95 max-w-xl leading-relaxed">
+              Bundle promotion at 14% depth to the Family Dinner segment projects <b>+HKD 412K incremental</b> across 4 launch-first clusters with high margin quality.
             </p>
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-2 mt-5">
               <button
                 onClick={() => applyPreset({ segmentId: "family-dinner", promoType: "bundle", depth: 14, horizon: 14, holiday: true, weather: false, pressure: "medium" })}
                 className="px-4 py-2 rounded-full bg-white text-primary text-sm font-semibold hover:bg-white/90 shadow-md">
-                Load scenario
+                Load this scenario
               </button>
               <Link to="/promotions" className="px-4 py-2 rounded-full bg-white/15 backdrop-blur border border-white/30 text-sm font-medium hover:bg-white/25">
                 Review promotion options →
+              </Link>
+              <Link to="/decisions" className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium hover:bg-white/20">
+                Why this recommendation
               </Link>
             </div>
           </div>
           <div className="hidden md:block relative">
             <img src={IMG.family} alt="Weekend family set" className="absolute inset-0 w-full h-full object-cover" loading="eager" width={1024} height={1024} />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary/40" />
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-primary/50" />
           </div>
         </div>
       </section>
 
-      {/* KPI grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
-        <KpiTile tone="primary" label="Predicted sales" value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="7-day window" icon={<DollarSign className="w-4 h-4" />} />
-        <KpiTile tone="success" label="Uplift" value={`+${sim.uplift}%`} sub="vs baseline" icon={<TrendingUp className="w-4 h-4" />} />
-        <KpiTile tone="warning" label="Incremental" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
-        <KpiTile label="Redemption" value={`${(15 + sim.uplift / 3).toFixed(1)}%`} delta={4.2} sub="rolling 7d" icon={<Percent className="w-4 h-4 text-primary" />} />
-        <KpiTile label="Confidence" value={`${sim.confidence}%`} sub="high" icon={<Target className="w-4 h-4 text-primary" />} />
-        <KpiTile label="Risk" value={sim.risk} sub={`Margin ${sim.margin}`} icon={<Shield className="w-4 h-4 text-primary" />} />
+      {/* Big KPI moments — the four numbers management cares about */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <KpiTile tone="primary" label="Predicted sales · 7 days" value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
+        <KpiTile tone="success" label="Expected uplift" value={`+${sim.uplift}%`} sub={`${sim.risk.toLowerCase()} risk`} icon={<TrendingUp className="w-4 h-4" />} />
+        <KpiTile tone="warning" label="Incremental revenue" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
+        <KpiTile tone="info" label="Forecast confidence" value={`${sim.confidence}%`} sub={`Margin ${sim.margin}/100`} icon={<Target className="w-4 h-4" />} />
       </div>
 
       <div className="grid lg:grid-cols-3 gap-5">
         {/* Top Opportunities */}
         <section className="lg:col-span-2 glass-card p-5">
-          <SectionHeader title="Top revenue opportunities" subtitle="Ranked by projected incremental this week" action={<Link to="/promotions"><CardLink>Open Promotion Engine</CardLink></Link>} />
+          <SectionHeader
+            title="Top revenue opportunities"
+            subtitle="Ranked by projected incremental this week"
+            action={<Link to="/promotions"><CardLink>Compare all options</CardLink></Link>}
+          />
           <div className="grid md:grid-cols-3 gap-3">
             {topOps.map((p, i) => (
               <button key={p.id}
@@ -64,7 +74,7 @@ export default function Dashboard() {
                 </div>
                 <div className="p-3">
                   <div className="text-sm font-semibold text-foreground">{p.name}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5">{p.description}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{p.description}</div>
                   <div className="flex items-center gap-2 mt-2 text-xs">
                     <span className="font-bold text-primary">+HKD {(180 + i * 60)}K</span>
                     <span className="text-muted-foreground">· {p.daypart}</span>
@@ -77,13 +87,13 @@ export default function Dashboard() {
 
         {/* Active Recommendation — PRIORITY */}
         <PriorityCard className="p-5 flex flex-col">
-          <SectionHeader title="Active recommendation" />
+          <div className="flex items-center gap-2 mb-2">
+            <ShieldCheck className="w-4 h-4 text-primary" />
+            <h2 className="text-base font-bold text-foreground">Recommended action</h2>
+          </div>
           <div className="space-y-3 flex-1">
-            <div className="p-3 rounded-lg bg-primary/10 border border-primary/25 shadow-sm">
-              <div className="text-[10px] font-bold text-primary uppercase tracking-wider">Recommended action</div>
-              <p className="text-sm font-medium text-foreground mt-1 leading-snug">{sim.recommendation}</p>
-            </div>
-            <ConfidenceMeter value={sim.confidence} />
+            <p className="text-[15px] font-medium text-foreground leading-snug">{sim.recommendation}</p>
+            <ConfidenceMeter value={sim.confidence} label="Forecast confidence" />
             <ConfidenceMeter value={sim.margin} label="Margin quality" />
             <div className="flex items-center gap-2 flex-wrap">
               <RiskBadge risk={sim.risk} />
@@ -91,15 +101,14 @@ export default function Dashboard() {
               <StatusChip tone="info">{scenario.depth}% depth</StatusChip>
             </div>
           </div>
-          <Link to="/decisions" className="mt-3"><CardLink>See rationale</CardLink></Link>
+          <Link to="/decisions" className="mt-3"><CardLink>See full rationale</CardLink></Link>
         </PriorityCard>
       </div>
-
 
       {/* Top products + Store snapshot */}
       <div className="grid lg:grid-cols-3 gap-5">
         <section className="glass-card p-5 lg:col-span-2">
-          <SectionHeader title="Top performing products" subtitle="Weekly units × trend" />
+          <SectionHeader title="Top performing products" subtitle="Weekly units and trend" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {products.slice(0, 4).map(p => (
               <div key={p.id} className="rounded-xl overflow-hidden bg-card border border-border hover:shadow-card-hover transition-all">
@@ -121,7 +130,7 @@ export default function Dashboard() {
         </section>
 
         <section className="glass-card p-5">
-          <SectionHeader title="Store clusters" subtitle="Ranked by suitability" action={<Link to="/stores"><CardLink>Compare</CardLink></Link>} />
+          <SectionHeader title="Rollout priority" subtitle="Where to launch first" action={<Link to="/stores"><CardLink>Full view</CardLink></Link>} />
           <div className="space-y-2">
             {sim.storeSuitability.slice(0, 5).map((s, i) => (
               <div key={s.storeId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
@@ -137,15 +146,15 @@ export default function Dashboard() {
         </section>
       </div>
 
-      {/* Management recommendation feed */}
+      {/* Management actions this week */}
       <section className="glass-card p-5">
-        <SectionHeader title="Recommendation feed" subtitle="Prioritized actions for this week" />
+        <SectionHeader title="Management actions this week" subtitle="Prioritized by revenue impact" />
         <div className="grid md:grid-cols-2 gap-2">
           {[
-            { chip: "primary", text: "Increase Weekend Family Set coverage from 60% → 80% of stores", icon: <Zap className="w-3.5 h-3.5" /> },
+            { chip: "primary", text: "Increase Weekend Family Set coverage from 60% → 80% of stores" },
             { chip: "info", text: "Tea Combo Upsell showing +18% uplift in Mong Kok — expand to Causeway Bay" },
-            { chip: "warning", text: "Hold Breakfast Value Push discount at 15% — margin quality softens above 18%" },
-            { chip: "success", text: "Hero Product Recovery ready for re-launch, 82% confidence" },
+            { chip: "warning", text: "Hold Breakfast Value Push at 15% depth — margin softens above 18%" },
+            { chip: "success", text: "Hero Product Recovery ready to re-launch — 82% confidence" },
           ].map((r, i) => (
             <div key={i} className="flex items-start gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted/60 transition-colors">
               <StatusChip tone={r.chip as any}>{r.chip === "primary" ? "Act now" : r.chip === "warning" ? "Monitor" : r.chip === "success" ? "Ready" : "Insight"}</StatusChip>

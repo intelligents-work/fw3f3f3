@@ -21,9 +21,9 @@ export default function Segments() {
   return (
     <div className="space-y-5 animate-fade-in">
       <PageHeader
-        eyebrow="Insights · Customer & Daypart"
+        eyebrow="Segment opportunity"
         title="Segment Insights"
-        subtitle="Which segments respond best to which promotions. Demo simulation."
+        subtitle="Which customer segments and dayparts respond best to which promotions. Demo simulation."
         takeaway={<><b className="text-primary">{topSeg.name}</b> shows the highest response potential — best served with {topSeg.offerStyle.toLowerCase()} during {topSeg.preferredDaypart.toLowerCase()}.</>}
         meta={<StatusChip tone="primary">{segments.length} segments tracked</StatusChip>}
       />
