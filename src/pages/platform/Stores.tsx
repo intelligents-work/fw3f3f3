@@ -13,8 +13,10 @@ const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number
 
 function heatCell(value: number) {
   const pct = Math.min(100, Math.max(0, value));
-  const alpha = (pct / 100) * 0.75 + 0.1;
-  return `hsl(14 89% 51% / ${alpha})`;
+  // Widened alpha range for stronger contrast between low, mid, and high cells.
+  // Low ≈ 0.04, mid ≈ 0.45, high ≈ 0.95 (was 0.1 → 0.85).
+  const alpha = Math.pow(pct / 100, 1.15) * 0.91 + 0.04;
+  return `hsl(14 89% 51% / ${alpha.toFixed(3)})`;
 }
 
 export default function Stores() {
