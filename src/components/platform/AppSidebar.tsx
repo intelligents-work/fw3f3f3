@@ -41,7 +41,7 @@ export function AppSidebar() {
           {!collapsed && (
             <div className="flex flex-col leading-tight">
               <span className="text-[13px] font-bold text-foreground">Fairwood AI</span>
-              <span className="text-[10px] text-muted-foreground">Decision Platform</span>
+              <span className="text-[10px] text-muted-foreground">Growth Platform</span>
             </div>
           )}
         </div>
