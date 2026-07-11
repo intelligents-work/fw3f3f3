@@ -71,11 +71,26 @@ export default function DecisionAnalysis() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis type="number" dataKey="risk" name="Risk" domain={[0, 60]} stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Risk (lower is better)", position: "insideBottom", offset: -2, fontSize: 11 }} />
                 <YAxis type="number" dataKey="impact" name="Incremental" stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Incremental HKD (K)", angle: -90, position: "insideLeft", fontSize: 11 }} />
-                <ZAxis type="number" dataKey="z" range={[80, 400]} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12 }} />
-                <Scatter data={impactRisk} fill="hsl(var(--primary))">
-                  <LabelList dataKey="name" position="top" fontSize={10} />
-                </Scatter>
+                <ZAxis type="number" dataKey="z" range={[80, 400]} name="Uplift" />
+                <Tooltip
+                  cursor={{ strokeDasharray: "3 3" }}
+                  contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12, fontSize: 12, padding: "8px 10px" }}
+                  content={({ active, payload }) => {
+                    if (!active || !payload?.length) return null;
+                    const d = payload[0].payload as { name: string; impact: number; risk: number; z: number };
+                    return (
+                      <div className="rounded-lg border border-border bg-card shadow-lg p-2.5 text-xs">
+                        <div className="font-semibold text-foreground mb-1">{d.name}</div>
+                        <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 tabular-nums">
+                          <span className="text-muted-foreground">Incremental</span><span className="text-right font-medium">HKD {d.impact}K</span>
+                          <span className="text-muted-foreground">Risk score</span><span className="text-right font-medium">{d.risk}</span>
+                          <span className="text-muted-foreground">Uplift</span><span className="text-right font-medium">+{d.z}%</span>
+                        </div>
+                      </div>
+                    );
+                  }}
+                />
+                <Scatter data={impactRisk} fill="hsl(var(--primary))" />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
