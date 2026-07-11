@@ -16,9 +16,7 @@ export default function Dashboard() {
           <div className="p-6 lg:p-8 bg-gradient-to-br from-primary via-primary to-[hsl(8_85%_44%)] text-primary-foreground relative">
             <div className="flex items-center gap-2">
               <StatusChip tone="warning">This week's priority</StatusChip>
-              <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider opacity-90">
-                <Sparkles className="w-3 h-3" /> Demo simulation
-              </span>
+              <DemoTag className="bg-white/20 text-white ring-white/30" />
             </div>
             <h1 className="text-[26px] lg:text-4xl font-bold mt-3 leading-[1.15]">
               Weekend Family Set is Fairwood's biggest revenue opportunity this week
