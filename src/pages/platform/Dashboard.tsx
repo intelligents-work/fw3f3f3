@@ -131,11 +131,11 @@ export default function Dashboard() {
           <SectionHeader title="Rollout priority" subtitle="Where to launch first" action={<Link to="/stores"><CardLink>Full view</CardLink></Link>} />
           <div className="space-y-2">
             {sim.storeSuitability.slice(0, 5).map((s, i) => (
-              <div key={s.storeId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                <div className="w-7 h-7 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">{i + 1}</div>
+              <div key={s.storeId} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">{i + 1}</div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-medium text-foreground truncate">{s.name}</div>
-                  <div className="text-[10px] text-muted-foreground">Fit score {s.score}</div>
+                  <div className="text-[13px] font-medium text-foreground leading-tight break-words">{s.name}</div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5">Fit score {s.score}</div>
                 </div>
                 <VerdictChip verdict={s.verdict} />
               </div>
