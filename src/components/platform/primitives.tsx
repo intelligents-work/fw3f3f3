@@ -134,7 +134,7 @@ export function StatusChip({ children, tone = "neutral" }: { children: ReactNode
     warning: "bg-[hsl(38_92%_50%/0.15)] text-[hsl(30_92%_38%)] ring-1 ring-[hsl(38_92%_50%/0.28)]",
     neutral: "bg-muted text-muted-foreground ring-1 ring-border",
   }[tone];
-  return <span className={cn("inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium", cls)}>{children}</span>;
+  return <span className={cn("inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap", cls)}>{children}</span>;
 }
 
 export function RiskBadge({ risk }: { risk: "Low" | "Medium" | "High" }) {
