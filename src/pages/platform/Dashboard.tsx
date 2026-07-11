@@ -47,7 +47,7 @@ export default function Dashboard() {
 
       {/* Big KPI moments — the four numbers management cares about */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiTile tone="primary" label="Predicted sales · 7 days" value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
+        <KpiTile tone="primary" label={`Predicted sales · ${scenario.horizon} days`} value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
         <KpiTile tone="success" label="Expected uplift" value={`+${sim.uplift}%`} sub={`${sim.risk.toLowerCase()} risk`} icon={<TrendingUp className="w-4 h-4" />} />
         <KpiTile tone="warning" label="Incremental revenue" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
         <KpiTile tone="info" label="Forecast confidence" value={`${sim.confidence}%`} sub={`Margin ${sim.margin}/100`} icon={<Target className="w-4 h-4" />} />
