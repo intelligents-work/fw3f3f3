@@ -35,9 +35,9 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r border-border">
-      <SidebarHeader className="border-b border-border">
-        <div className="flex items-center gap-2 px-2 py-2">
-          <img src={fairwoodLogo} alt="Fairwood" className="h-8 w-auto object-contain" />
+      <SidebarHeader className="border-b border-border h-14 justify-center py-0">
+        <div className="flex items-center gap-2 px-2">
+          <img src={fairwoodLogo} alt="Fairwood" className="h-7 w-auto object-contain" />
           {!collapsed && (
             <div className="flex flex-col leading-tight">
               <span className="text-[13px] font-bold text-foreground">Fairwood AI</span>
