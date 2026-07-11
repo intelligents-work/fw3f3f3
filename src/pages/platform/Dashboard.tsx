@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { usePlatform } from "@/lib/platform/context";
-import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard, DemoTag } from "@/components/platform/primitives";
 import { presets, products, IMG } from "@/lib/platform/data";
-import { DollarSign, TrendingUp, Target, ArrowUpRight, Sparkles, ShieldCheck } from "lucide-react";
+import { DollarSign, TrendingUp, Target, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 export default function Dashboard() {
   const { sim, scenario, applyPreset } = usePlatform();
@@ -16,9 +16,7 @@ export default function Dashboard() {
           <div className="p-6 lg:p-8 bg-gradient-to-br from-primary via-primary to-[hsl(8_85%_44%)] text-primary-foreground relative">
             <div className="flex items-center gap-2">
               <StatusChip tone="warning">This week's priority</StatusChip>
-              <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider opacity-90">
-                <Sparkles className="w-3 h-3" /> Demo simulation
-              </span>
+              <DemoTag className="bg-white/20 text-white ring-white/30" />
             </div>
             <h1 className="text-[26px] lg:text-4xl font-bold mt-3 leading-[1.15]">
               Weekend Family Set is Fairwood's biggest revenue opportunity this week
@@ -49,7 +47,7 @@ export default function Dashboard() {
 
       {/* Big KPI moments — the four numbers management cares about */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiTile tone="primary" label="Predicted sales · 7 days" value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
+        <KpiTile tone="primary" label={`Predicted sales · ${scenario.horizon} days`} value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
         <KpiTile tone="success" label="Expected uplift" value={`+${sim.uplift}%`} sub={`${sim.risk.toLowerCase()} risk`} icon={<TrendingUp className="w-4 h-4" />} />
         <KpiTile tone="warning" label="Incremental revenue" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
         <KpiTile tone="info" label="Forecast confidence" value={`${sim.confidence}%`} sub={`Margin ${sim.margin}/100`} icon={<Target className="w-4 h-4" />} />
@@ -133,11 +131,11 @@ export default function Dashboard() {
           <SectionHeader title="Rollout priority" subtitle="Where to launch first" action={<Link to="/stores"><CardLink>Full view</CardLink></Link>} />
           <div className="space-y-2">
             {sim.storeSuitability.slice(0, 5).map((s, i) => (
-              <div key={s.storeId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                <div className="w-7 h-7 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">{i + 1}</div>
+              <div key={s.storeId} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="w-7 h-7 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">{i + 1}</div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-medium text-foreground truncate">{s.name}</div>
-                  <div className="text-[10px] text-muted-foreground">Fit score {s.score}</div>
+                  <div className="text-[13px] font-medium text-foreground leading-tight break-words">{s.name}</div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5">Fit score {s.score}</div>
                 </div>
                 <VerdictChip verdict={s.verdict} />
               </div>

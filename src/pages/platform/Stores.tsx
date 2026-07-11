@@ -86,14 +86,15 @@ export default function Stores() {
                 <tr key={r.id} className="border-b border-border/60 hover:bg-muted/30">
                   <td className="py-2 pr-3 font-semibold">{r.name}</td>
                   {metrics.map(m => {
-                    const raw = r[m.key] as number;
+                    const raw = Number(r[m.key] ?? 0);
                     const norm = m.key === "aov" ? (raw / 80) * 100 : m.key === "weeklyOrders" ? (raw / 6500) * 100 : raw;
+                    const display = m.format ? m.format(raw) : String(raw);
                     return (
                       <td key={m.key as string} className="py-2 px-2">
-                        <div className="rounded-md px-2 py-1 inline-block font-medium tabular-nums text-xs"
+                        <span className="rounded-md px-2 py-1 inline-block font-semibold tabular-nums text-xs min-w-[48px] text-center"
                           style={{ background: heatCell(norm), color: norm > 55 ? "white" : "hsl(0 0% 15%)" }}>
-                          {m.format ? m.format(raw) : raw}
-                        </div>
+                          {display}
+                        </span>
                       </td>
                     );
                   })}

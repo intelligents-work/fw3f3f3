@@ -93,7 +93,7 @@ export default function Segments() {
           <SectionHeader title="Response comparison" subtitle="Response index by segment" action={<DemoTag />} />
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={compareData} layout="vertical" margin={{ right: 32 }}>
+              <BarChart data={compareData} layout="vertical" margin={{ right: 48, left: 4 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" horizontal={false} />
                 <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={11} domain={[0, 100]} />
                 <YAxis dataKey="name" type="category" width={70} stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} />
