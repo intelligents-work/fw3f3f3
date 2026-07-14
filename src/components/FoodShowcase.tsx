@@ -19,7 +19,7 @@ const products = [
   {
     id: 2,
     image: foodBurger,
-    name: "Zinger Combo",
+    name: "Crispy Chicken Combo",
     segment: "Segment B",
     stats: { orders: 412, conversion: "14.5%" },
     trend: "+8%",

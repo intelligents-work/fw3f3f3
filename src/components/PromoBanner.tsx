@@ -22,7 +22,7 @@ const banners = [
   {
     id: 2,
     image: foodBurger,
-    title: "Zinger Combo Special",
+    title: "Crispy Chicken Combo Special",
     subtitle: "Second Purchase Campaign",
     stat: "+15%",
     statLabel: "AOV Lift",
