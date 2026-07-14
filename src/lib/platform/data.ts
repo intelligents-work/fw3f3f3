@@ -6,6 +6,7 @@ import breakfastAsset from "@/assets/food-breakfast-set.jpg.asset.json";
 import teaComboAsset from "@/assets/food-tea-combo.jpg.asset.json";
 import familyAsset from "@/assets/food-family-set.jpg.asset.json";
 import signatureAsset from "@/assets/food-signature-rice.jpg.asset.json";
+import dinersAsset from "@/assets/fairwood-diners-hk.jpg.asset.json";
 
 const burger = burgerAsset.url;
 const curry = curryAsset.url;
@@ -14,8 +15,9 @@ const breakfast = breakfastAsset.url;
 const teaCombo = teaComboAsset.url;
 const family = familyAsset.url;
 const signature = signatureAsset.url;
+const diners = dinersAsset.url;
 
-export const IMG = { burger, curry, desserts, breakfast, teaCombo, family, signature };
+export const IMG = { burger, curry, desserts, breakfast, teaCombo, family, signature, diners };
 
 
 export type StoreId =

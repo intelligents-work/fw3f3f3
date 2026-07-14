@@ -1,6 +1,6 @@
 import { stores } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, VerdictChip, PageHeader, DemoTag } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, VerdictChip, PageHeader } from "@/components/platform/primitives";
 import { cn } from "@/lib/utils";
 
 const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number) => string }[] = [
@@ -34,7 +34,7 @@ export default function Stores() {
       <PageHeader
         eyebrow="Rollout prioritization"
         title="Store & Cluster Rollout"
-        subtitle="Where to launch first, test next, or hold as we scale the current recommendation. Demo simulation."
+        subtitle="Where to launch first, test next, or hold as we scale the current recommendation."
         takeaway={<><b className="text-primary">Launch first in {launchFirst}</b> — highest fit for the current scenario. Monitor 5 days, then scale to test-next clusters.</>}
         meta={<><StatusChip tone="success">{rows.filter(r => r.verdict === "Launch first").length} launch</StatusChip><StatusChip tone="info">{rows.filter(r => r.verdict === "Test next").length} test</StatusChip></>}
       />
@@ -43,7 +43,6 @@ export default function Stores() {
       {/* Leaderboard */}
       <div className="flex items-center justify-between">
         <SectionHeader title="Cluster leaderboard" subtitle="Fit score for the current scenario" />
-        <DemoTag />
       </div>
       <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
         {rows.map((r, i) => (
@@ -58,7 +57,6 @@ export default function Stores() {
             <div className="mt-3 flex items-baseline gap-2">
               <span className="text-2xl font-bold text-primary tabular-nums">{r.score}</span>
               <span className="text-[11px] text-muted-foreground">fit score</span>
-              <DemoTag className="ml-auto" />
             </div>
             <div className="mt-2 text-[11px] text-muted-foreground">AOV HKD {r.aov.toFixed(1)} · {(r.weeklyOrders / 1000).toFixed(1)}K/wk</div>
           </div>
@@ -70,7 +68,7 @@ export default function Stores() {
         <SectionHeader
           title="Comparative KPIs"
           subtitle="Deeper red = higher relative index"
-          action={<DemoTag />}
+          
         />
         <div className="overflow-x-auto">
           <table className="w-full text-sm min-w-[640px]">

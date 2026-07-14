@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePlatform } from "@/lib/platform/context";
 import { rankPromos } from "@/lib/platform/engine";
 import { segments } from "@/lib/platform/data";
-import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard, DemoTag } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard } from "@/components/platform/primitives";
 import { Sparkles, Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export default function PromotionEngine() {
       <PageHeader
         eyebrow="Promotion planning"
         title="Promo Recommendation"
-        subtitle={`Three ranked options for ${seg.name} at ${scenario.depth}% depth, with the top pick highlighted. Demo simulation.`}
+        subtitle={`Three ranked options for ${seg.name} at ${scenario.depth}% depth, with the top pick highlighted.`}
         takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and HKD {top.sim.incremental}K incremental. Launch first in {launchFirst}.</>}
         meta={<><RiskBadge risk={top.sim.risk} /><StatusChip tone="primary">Recommended</StatusChip></>}
         action={
@@ -77,17 +77,17 @@ export default function PromotionEngine() {
                   <p className={cn("text-muted-foreground", isTop ? "text-sm" : "text-[11px] line-clamp-2")}>{r.promo.description}</p>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div className={cn("relative rounded-lg min-w-0", isTop ? "p-3 pt-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 pt-2 bg-muted/50")}>
-                      {isTop && <DemoTag className="absolute top-1.5 right-1.5" />}
+                      {isTop && }
                       <div className="text-[10px] uppercase tracking-wide text-muted-foreground leading-none mb-1">Uplift</div>
                       <div className={cn("font-bold text-[hsl(145_63%_36%)] tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>+{r.sim.uplift}%</div>
                     </div>
                     <div className={cn("relative rounded-lg min-w-0", isTop ? "p-3 pt-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 pt-2 bg-muted/50")}>
-                      {isTop && <DemoTag className="absolute top-1.5 right-1.5" />}
+                      {isTop && }
                       <div className="text-[10px] uppercase tracking-wide text-muted-foreground leading-none mb-1">Incremental</div>
                       <div className={cn("font-bold text-primary tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>HKD {r.sim.incremental}K</div>
                     </div>
                   </div>
-                  {!isTop && <div className="flex justify-end"><DemoTag /></div>}
+                  {!isTop && }
                   <div className="space-y-2">
                     <ConfidenceMeter value={r.sim.confidence} />
                     <ConfidenceMeter value={r.sim.margin} label="Margin" />

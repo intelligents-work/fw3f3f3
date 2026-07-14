@@ -15,7 +15,7 @@ export default function Prediction() {
       <PageHeader
         eyebrow="Sales forecasting"
         title="Sales Prediction"
-        subtitle="Model expected sales, uplift, and risk under different promotion scenarios. Demo simulation."
+        subtitle="Model expected sales, uplift, and risk under different promotion scenarios."
         takeaway={<>Current scenario projects <b className="text-primary">+{sim.uplift}% uplift</b> and <b className="text-primary">HKD {sim.incremental}K incremental</b> over {scenario.horizon} days — confidence {sim.confidence}%, {sim.risk.toLowerCase()} risk.</>}
         meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{seg.name}</StatusChip></>}
         action={

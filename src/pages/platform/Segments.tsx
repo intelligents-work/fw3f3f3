@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { segments, type SegmentDef } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader, DemoTag } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader } from "@/components/platform/primitives";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from "recharts";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ export default function Segments() {
       <PageHeader
         eyebrow="Segment opportunity"
         title="Segment Insights"
-        subtitle="Which customer segments and dayparts respond best to which promotions. Demo simulation."
+        subtitle="Which customer segments and dayparts respond best to which promotions."
         takeaway={<><b className="text-primary">{topSeg.name}</b> — top responder at {topSeg.preferredDaypart.toLowerCase()}.</>}
         meta={<StatusChip tone="primary">{segments.length} segments tracked</StatusChip>}
       />
@@ -69,7 +69,6 @@ export default function Segments() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted-foreground uppercase">Response signals</span>
-                <DemoTag />
               </div>
               <ConfidenceMeter value={pick.discountSensitivity} label="Discount sensitivity" />
               <ConfidenceMeter value={pick.bundleAffinity} label="Bundle affinity" />
@@ -90,7 +89,7 @@ export default function Segments() {
         </div>
 
         <div className="glass-card p-5">
-          <SectionHeader title="Response comparison" subtitle="Response index by segment" action={<DemoTag />} />
+          <SectionHeader title="Response comparison" subtitle="Response index by segment"  />
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={compareData} layout="vertical" margin={{ right: 48, left: 4 }}>
