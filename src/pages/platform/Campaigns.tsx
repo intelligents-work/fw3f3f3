@@ -27,7 +27,7 @@ export default function Campaigns() {
         eyebrow="Campaign Performance · Review"
         title="Campaign Performance"
         subtitle="Live and recent campaigns with uplift, incremental revenue, and management summary."
-        takeaway={<><b className="text-primary">{bestLive.name}</b> is the top live performer at <b className="text-primary">+{bestLive.uplift}%</b> uplift and HKD {bestLive.incremental}K incremental across {bestLive.storeCoverage}% of stores.</>}
+        takeaway={<><b className="text-primary">{bestLive.name}</b> is the top live performer at <b className="text-primary">+{bestLive.uplift}%</b> uplift and {fmtHKDFromK(bestLive.incremental)} incremental across {bestLive.storeCoverage}% of stores.</>}
         meta={<><StatusChip tone="success">{campaigns.filter(c => c.status === "live").length} live</StatusChip><StatusChip tone="neutral">{campaigns.length} total</StatusChip></>}
         action={
           <div className="flex gap-1 bg-muted/60 p-1 rounded-full">
