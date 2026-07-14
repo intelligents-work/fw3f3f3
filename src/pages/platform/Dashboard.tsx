@@ -74,7 +74,7 @@ export default function Dashboard() {
                   <div className="text-sm font-semibold text-foreground">{p.name}</div>
                   <div className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{p.description}</div>
                   <div className="flex items-center gap-2 mt-2 text-xs">
-                    <span className="font-bold text-primary">+HKD {(180 + i * 60)}K</span>
+                    <span className="font-bold text-primary">+{fmtHKDFromK(180 + i * 60)}</span>
                     <span className="text-muted-foreground">· {p.daypart}</span>
                   </div>
                 </div>
