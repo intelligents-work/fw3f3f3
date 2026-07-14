@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { fmtHKD, fmtHKDFromK } from "@/lib/platform/format";
 
 export default function Prediction() {
   const { scenario, setScenario, applyPreset, sim } = usePlatform();
