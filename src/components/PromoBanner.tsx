@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, TrendingUp, Utensils } from "lucide-react";
 import foodCurryAsset from "@/assets/food-curry-brisket.jpg.asset.json";
-import foodBurgerAsset from "@/assets/food-burger-combo.jpg.asset.json";
+import foodPorkChopAsset from "@/assets/food-pork-chop-rice.jpg.asset.json";
 import foodDessertsAsset from "@/assets/food-desserts.jpg.asset.json";
 const foodCurry = foodCurryAsset.url;
-const foodBurger = foodBurgerAsset.url;
+const foodPorkChop = foodPorkChopAsset.url;
 const foodDesserts = foodDessertsAsset.url;
 
 
@@ -21,8 +21,8 @@ const banners = [
   },
   {
     id: 2,
-    image: foodBurger,
-    title: "Crispy Chicken Combo Special",
+    image: foodPorkChop,
+    title: "Baked Pork Chop Combo Special",
     subtitle: "Second Purchase Campaign",
     stat: "+15%",
     statLabel: "AOV Lift",

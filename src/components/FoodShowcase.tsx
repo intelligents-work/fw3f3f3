@@ -1,9 +1,9 @@
 import { TrendingUp, Users, Target } from "lucide-react";
 import foodCurryAsset from "@/assets/food-curry-brisket.jpg.asset.json";
-import foodBurgerAsset from "@/assets/food-burger-combo.jpg.asset.json";
+import foodPorkChopAsset from "@/assets/food-pork-chop-rice.jpg.asset.json";
 import foodDessertsAsset from "@/assets/food-desserts.jpg.asset.json";
 const foodCurry = foodCurryAsset.url;
-const foodBurger = foodBurgerAsset.url;
+const foodPorkChop = foodPorkChopAsset.url;
 const foodDesserts = foodDessertsAsset.url;
 
 
@@ -18,8 +18,8 @@ const products = [
   },
   {
     id: 2,
-    image: foodBurger,
-    name: "Crispy Chicken Combo",
+    image: foodPorkChop,
+    name: "Baked Pork Chop Combo",
     segment: "Segment B",
     stats: { orders: 412, conversion: "14.5%" },
     trend: "+8%",

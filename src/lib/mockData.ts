@@ -128,9 +128,9 @@ export const getActivityFeed = (): ActivityEvent[] => [
     title: "Segment Assignment",
     details: [
       "23 new customers assigned to Segment B",
-      'First order: "Crispy Chicken + Drink, no sides"',
+      'First order: "Baked Pork Chop + Drink, no sides"',
       "Insight: Lacking combo structure",
-      "Targeting offer: Crispy Chicken + Fries + Drink combo @ HKD 49",
+      "Targeting offer: Baked Pork Chop + Fries + Drink combo @ HKD 49",
     ],
     result: "Scheduled: T+7 golden window",
   },
@@ -199,7 +199,7 @@ export const customerProfiles: CustomerProfile[] = [
     location: "Tsim Sha Tsui",
     segment: "Main Course Lover",
     firstOrder: {
-      item: "Crispy Chicken + Pepsi",
+      item: "Baked Pork Chop + Pepsi",
       price: 52,
       time: "1:15 PM (lunch)",
       device: "Mobile app",
@@ -212,12 +212,12 @@ export const customerProfiles: CustomerProfile[] = [
       conversionLikelihood: 71,
     },
     recommendation: {
-      bundle: "Crispy Chicken + Curry Beef Brisket + Iced Lemon Tea",
+      bundle: "Baked Pork Chop + Curry Beef Brisket + Iced Lemon Tea",
       originalPrice: 98,
       offerPrice: 79,
       discount: 19,
       aovLift: 27,
-      reason: "Sarah loves burgers. 67% of similar customers who tried curry loved it. Bundle cross-sells curry category. Premium combo drives higher AOV.",
+      reason: "Sarah loves rice plates. 67% of similar customers who tried curry loved it. Bundle cross-sells curry category. Premium combo drives higher AOV.",
     },
   },
   {
@@ -327,7 +327,7 @@ export const customerJourney: JourneyStep[] = [
     title: "First Purchase",
     description: "Customer makes their first order",
     details: [
-      "Item: Crispy Chicken + Pepsi",
+      "Item: Baked Pork Chop + Pepsi",
       "Price: HKD 52",
       "Store: Causeway Bay #12",
       "Time: Jan 9, 12:45 PM",
@@ -343,7 +343,7 @@ export const customerJourney: JourneyStep[] = [
     details: [
       "⚡ AUTO-TRIGGER: Customer hasn't ordered in 7 days",
       "Sending personalized offer via App Push",
-      "Offer: Crispy Chicken + Curry Beef Brisket Bundle",
+      "Offer: Baked Pork Chop + Curry Beef Brisket Bundle",
       "Price: HKD 79 (normally HKD 98)",
       "Result: Notification opened in 4 minutes",
       "Order placed: HKD 79 (↑52% vs 1st order)",
