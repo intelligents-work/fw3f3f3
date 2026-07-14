@@ -34,8 +34,8 @@ export default function Prediction() {
 
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiTile tone="primary" label="Predicted weekly" value={`HKD ${(sim.predictedWeekly/1000).toFixed(0)}K`} delta={sim.uplift} />
-        <KpiTile tone="success" label="Incremental" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day`} />
+        <KpiTile tone="primary" label="Predicted weekly" value={fmtHKD(sim.predictedWeekly)} delta={sim.uplift} />
+        <KpiTile tone="success" label="Incremental" value={fmtHKDFromK(sim.incremental)} sub={`${scenario.horizon}-day`} />
         <KpiTile tone="info" label="Confidence" value={`${sim.confidence}%`} />
         <KpiTile tone="warning" label="Margin quality" value={`${sim.margin}`} sub="index / 100" />
       </div>
