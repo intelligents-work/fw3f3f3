@@ -77,7 +77,7 @@ export const segments: SegmentDef[] = [
   { id: "young-adults", name: "Young Adults", size: 18420, aovBias: 92,
     discountSensitivity: 82, bundleAffinity: 88, preferredDaypart: "Tea",
     channels: ["App push", "Social"], offerStyle: "Bundle + trendy hero item",
-    products: ["Zinger Burger", "Iced Lemon Tea", "Fries"], image: burger, accent: "hsl(14 89% 51%)" },
+    products: ["Crispy Chicken", "Iced Lemon Tea", "Fries"], image: burger, accent: "hsl(14 89% 51%)" },
   { id: "office-lunch", name: "Office Lunch", size: 26310, aovBias: 105,
     discountSensitivity: 48, bundleAffinity: 72, preferredDaypart: "Lunch",
     channels: ["App push", "SMS"], offerStyle: "Fast lunch combo, time-window",
@@ -156,7 +156,7 @@ export interface ProductDef {
 export const products: ProductDef[] = [
   { id: "curry-brisket", name: "Curry Beef Brisket", image: curry, category: "Signature", weeklyUnits: 12480, trend: 8.2 },
   { id: "signature-rice", name: "Signature Char Siu Rice", image: signature, category: "Signature", weeklyUnits: 10240, trend: 4.1 },
-  { id: "zinger-combo", name: "Zinger Burger Combo", image: burger, category: "Bundle", weeklyUnits: 8940, trend: 12.6 },
+  { id: "zinger-combo", name: "Crispy Chicken Combo", image: burger, category: "Bundle", weeklyUnits: 8940, trend: 12.6 },
   { id: "tea-combo", name: "Tea-Time Combo", image: teaCombo, category: "Combo", weeklyUnits: 7620, trend: 6.8 },
   { id: "breakfast-set", name: "HK Breakfast Set", image: breakfast, category: "Daypart", weeklyUnits: 6810, trend: -2.4 },
   { id: "family-set", name: "Family Sharing Set", image: family, category: "Bundle", weeklyUnits: 4290, trend: 15.4 },

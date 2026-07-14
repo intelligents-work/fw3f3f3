@@ -128,9 +128,9 @@ export const getActivityFeed = (): ActivityEvent[] => [
     title: "Segment Assignment",
     details: [
       "23 new customers assigned to Segment B",
-      'First order: "Zinger Burger + Drink, no sides"',
+      'First order: "Crispy Chicken + Drink, no sides"',
       "Insight: Lacking combo structure",
-      "Targeting offer: Zinger + Fries + Drink combo @ HKD 49",
+      "Targeting offer: Crispy Chicken + Fries + Drink combo @ HKD 49",
     ],
     result: "Scheduled: T+7 golden window",
   },
@@ -199,7 +199,7 @@ export const customerProfiles: CustomerProfile[] = [
     location: "Tsim Sha Tsui",
     segment: "Main Course Lover",
     firstOrder: {
-      item: "Zinger Burger + Pepsi",
+      item: "Crispy Chicken + Pepsi",
       price: 52,
       time: "1:15 PM (lunch)",
       device: "Mobile app",
@@ -212,7 +212,7 @@ export const customerProfiles: CustomerProfile[] = [
       conversionLikelihood: 71,
     },
     recommendation: {
-      bundle: "Zinger Burger + Curry Beef Brisket + Iced Lemon Tea",
+      bundle: "Crispy Chicken + Curry Beef Brisket + Iced Lemon Tea",
       originalPrice: 98,
       offerPrice: 79,
       discount: 19,
@@ -327,7 +327,7 @@ export const customerJourney: JourneyStep[] = [
     title: "First Purchase",
     description: "Customer makes their first order",
     details: [
-      "Item: Zinger Burger + Pepsi",
+      "Item: Crispy Chicken + Pepsi",
       "Price: HKD 52",
       "Store: Causeway Bay #12",
       "Time: Jan 9, 12:45 PM",
@@ -343,7 +343,7 @@ export const customerJourney: JourneyStep[] = [
     details: [
       "⚡ AUTO-TRIGGER: Customer hasn't ordered in 7 days",
       "Sending personalized offer via App Push",
-      "Offer: Zinger + Curry Beef Brisket Bundle",
+      "Offer: Crispy Chicken + Curry Beef Brisket Bundle",
       "Price: HKD 79 (normally HKD 98)",
       "Result: Notification opened in 4 minutes",
       "Order placed: HKD 79 (↑52% vs 1st order)",
