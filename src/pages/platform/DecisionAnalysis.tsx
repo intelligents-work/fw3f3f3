@@ -71,7 +71,7 @@ export default function DecisionAnalysis() {
               <ScatterChart margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis type="number" dataKey="risk" name="Risk" domain={[0, 60]} stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Risk (lower is better)", position: "insideBottom", offset: -2, fontSize: 11 }} />
-                <YAxis type="number" dataKey="impact" name="Incremental" stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Incremental HKD (K)", angle: -90, position: "insideLeft", fontSize: 11 }} />
+                <YAxis type="number" dataKey="impact" name="Incremental" stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Incremental HKD (thousands)", angle: -90, position: "insideLeft", fontSize: 11 }} />
                 <ZAxis type="number" dataKey="z" range={[80, 400]} name="Uplift" />
                 <Tooltip
                   cursor={{ strokeDasharray: "3 3" }}
