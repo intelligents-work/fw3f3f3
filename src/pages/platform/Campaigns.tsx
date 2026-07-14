@@ -3,6 +3,7 @@ import { campaigns, type CampaignDef } from "@/lib/platform/data";
 import { SectionHeader, StatusChip, ConfidenceMeter, KpiTile, PageHeader } from "@/components/platform/primitives";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { cn } from "@/lib/utils";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 const filters = ["All", "Live", "Recent", "Past"] as const;
 
