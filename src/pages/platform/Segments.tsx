@@ -23,7 +23,7 @@ export default function Segments() {
       <PageHeader
         eyebrow="Segment opportunity"
         title="Segment Insights"
-        subtitle="Which customer segments and dayparts respond best to which promotions. Demo simulation."
+        subtitle="Which customer segments and dayparts respond best to which promotions."
         takeaway={<><b className="text-primary">{topSeg.name}</b> — top responder at {topSeg.preferredDaypart.toLowerCase()}.</>}
         meta={<StatusChip tone="primary">{segments.length} segments tracked</StatusChip>}
       />

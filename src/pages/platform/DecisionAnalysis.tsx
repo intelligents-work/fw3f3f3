@@ -31,7 +31,7 @@ export default function DecisionAnalysis() {
       <PageHeader
         eyebrow="Decision support"
         title="Decision Analysis"
-        subtitle="Why this recommendation is strong, and what changes if we adjust the plan. Demo simulation."
+        subtitle="Why this recommendation is strong, and what changes if we adjust the plan."
         takeaway={<><b className="text-primary">Recommendation:</b> {sim.recommendation}</>}
         meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{sim.confidence}% confidence</StatusChip></>}
       />

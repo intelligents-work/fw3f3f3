@@ -22,7 +22,7 @@ export default function PromotionEngine() {
       <PageHeader
         eyebrow="Promotion planning"
         title="Promo Recommendation"
-        subtitle={`Three ranked options for ${seg.name} at ${scenario.depth}% depth, with the top pick highlighted. Demo simulation.`}
+        subtitle={`Three ranked options for ${seg.name} at ${scenario.depth}% depth, with the top pick highlighted.`}
         takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and HKD {top.sim.incremental}K incremental. Launch first in {launchFirst}.</>}
         meta={<><RiskBadge risk={top.sim.risk} /><StatusChip tone="primary">Recommended</StatusChip></>}
         action={
