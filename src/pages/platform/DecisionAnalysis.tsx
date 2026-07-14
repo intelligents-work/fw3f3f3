@@ -83,7 +83,7 @@ export default function DecisionAnalysis() {
                       <div className="rounded-lg border border-border bg-card shadow-lg p-2.5 text-xs">
                         <div className="font-semibold text-foreground mb-1">{d.name}</div>
                         <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 tabular-nums">
-                          <span className="text-muted-foreground">Incremental</span><span className="text-right font-medium">HKD {d.impact}K</span>
+                          <span className="text-muted-foreground">Incremental</span><span className="text-right font-medium">{fmtHKDFromK(d.impact)}</span>
                           <span className="text-muted-foreground">Risk score</span><span className="text-right font-medium">{d.risk}</span>
                           <span className="text-muted-foreground">Uplift</span><span className="text-right font-medium">+{d.z}%</span>
                         </div>
