@@ -57,7 +57,7 @@ export default function Campaigns() {
                 <div className="text-sm font-semibold truncate">{c.name}</div>
                 <div className="flex gap-3 mt-1 text-xs">
                   <span className="font-bold text-[hsl(145_63%_36%)]">+{c.uplift}%</span>
-                  <span className="text-primary font-semibold">HKD {c.incremental}K</span>
+                  <span className="text-primary font-semibold">{fmtHKDFromK(c.incremental)}</span>
                   <span className="text-muted-foreground">{c.confidence}% conf</span>
                 </div>
                 <div className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{c.summary}</div>
