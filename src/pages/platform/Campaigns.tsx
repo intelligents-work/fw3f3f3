@@ -83,7 +83,7 @@ export default function Campaigns() {
             <div className="p-5">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
                 <KpiTile label="Uplift" value={`+${selected.uplift}%`} tone="success" />
-                <KpiTile label="Incremental" value={`HKD ${selected.incremental}K`} tone="primary" />
+                <KpiTile label="Incremental" value={fmtHKDFromK(selected.incremental)} tone="primary" />
                 <KpiTile label="Reach" value={`${(selected.reach/1000).toFixed(1)}K`} />
                 <KpiTile label="Coverage" value={`${selected.storeCoverage}%`} />
               </div>
