@@ -140,7 +140,7 @@ export default function DecisionAnalysis() {
                   <tr key={r.depth} className={`border-b border-border/60 ${r.depth === scenario.depth ? "bg-primary/5 font-semibold" : ""}`}>
                     <td className="py-2">{r.depth}%{r.depth === scenario.depth && <span className="ml-2 text-[10px] text-primary">CURRENT</span>}</td>
                     <td className="py-2 px-2 text-right tabular-nums">+{r.uplift}%</td>
-                    <td className="py-2 px-2 text-right tabular-nums">{r.incremental}</td>
+                    <td className="py-2 px-2 text-right tabular-nums">{fmtHKDFromK(r.incremental)}</td>
                     <td className="py-2 px-2 text-right tabular-nums">{r.confidence}%</td>
                     <td className="py-2 px-2 text-right tabular-nums">{r.margin}</td>
                   </tr>
