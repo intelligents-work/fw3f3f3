@@ -217,7 +217,7 @@ export const customerProfiles: CustomerProfile[] = [
       offerPrice: 79,
       discount: 19,
       aovLift: 27,
-      reason: "Sarah loves burgers. 67% of similar customers who tried curry loved it. Bundle cross-sells curry category. Premium combo drives higher AOV.",
+      reason: "Sarah loves rice plates. 67% of similar customers who tried curry loved it. Bundle cross-sells curry category. Premium combo drives higher AOV.",
     },
   },
   {
