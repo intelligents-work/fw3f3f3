@@ -130,7 +130,7 @@ export default function DecisionAnalysis() {
                 <tr className="text-xs text-muted-foreground uppercase border-b border-border">
                   <th className="text-left py-2">Depth</th>
                   <th className="text-right py-2 px-2">Uplift</th>
-                  <th className="text-right py-2 px-2">Incremental (HKD K)</th>
+                  <th className="text-right py-2 px-2">Incremental</th>
                   <th className="text-right py-2 px-2">Confidence</th>
                   <th className="text-right py-2 px-2">Margin</th>
                 </tr>
