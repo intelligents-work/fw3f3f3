@@ -3,6 +3,7 @@ import { stores, segments, promos, presets } from "@/lib/platform/data";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Zap } from "lucide-react";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 export function ScenarioBar() {
   const { scenario, setScenario, applyPreset, sim } = usePlatform();
