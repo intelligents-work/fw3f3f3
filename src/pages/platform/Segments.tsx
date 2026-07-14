@@ -69,7 +69,6 @@ export default function Segments() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted-foreground uppercase">Response signals</span>
-                <DemoTag />
               </div>
               <ConfidenceMeter value={pick.discountSensitivity} label="Discount sensitivity" />
               <ConfidenceMeter value={pick.bundleAffinity} label="Bundle affinity" />
@@ -90,7 +89,7 @@ export default function Segments() {
         </div>
 
         <div className="glass-card p-5">
-          <SectionHeader title="Response comparison" subtitle="Response index by segment" action={<DemoTag />} />
+          <SectionHeader title="Response comparison" subtitle="Response index by segment"  />
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={compareData} layout="vertical" margin={{ right: 48, left: 4 }}>
