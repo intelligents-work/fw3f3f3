@@ -1,5 +1,5 @@
 // Fairwood AI Platform — mock master data (demo only)
-import burgerAsset from "@/assets/food-burger-combo.jpg.asset.json";
+import porkChopAsset from "@/assets/food-pork-chop-rice.jpg.asset.json";
 import curryAsset from "@/assets/food-curry-brisket.jpg.asset.json";
 import dessertsAsset from "@/assets/food-desserts.jpg.asset.json";
 import breakfastAsset from "@/assets/food-breakfast-set.jpg.asset.json";
@@ -8,7 +8,7 @@ import familyAsset from "@/assets/food-family-set.jpg.asset.json";
 import signatureAsset from "@/assets/food-signature-rice.jpg.asset.json";
 import dinersAsset from "@/assets/fairwood-hk-family.jpg.asset.json";
 
-const burger = burgerAsset.url;
+const porkChop = porkChopAsset.url;
 const curry = curryAsset.url;
 const desserts = dessertsAsset.url;
 const breakfast = breakfastAsset.url;
@@ -17,7 +17,7 @@ const family = familyAsset.url;
 const signature = signatureAsset.url;
 const diners = dinersAsset.url;
 
-export const IMG = { burger, curry, desserts, breakfast, teaCombo, family, signature, diners };
+export const IMG = { porkChop, curry, desserts, breakfast, teaCombo, family, signature, diners };
 
 
 export type StoreId =
@@ -74,10 +74,10 @@ export interface SegmentDef {
 }
 
 export const segments: SegmentDef[] = [
-  { id: "young-adults", name: "Young Adults", size: 18420, aovBias: 92,
+  { id: "young-adults", name: "Students", size: 18420, aovBias: 92,
     discountSensitivity: 82, bundleAffinity: 88, preferredDaypart: "Tea",
     channels: ["App push", "Social"], offerStyle: "Bundle + trendy hero item",
-    products: ["Crispy Chicken", "Iced Lemon Tea", "Fries"], image: burger, accent: "hsl(14 89% 51%)" },
+    products: ["Baked Pork Chop", "Iced Lemon Tea", "Fries"], image: porkChop, accent: "hsl(14 89% 51%)" },
   { id: "office-lunch", name: "Office Lunch", size: 26310, aovBias: 105,
     discountSensitivity: 48, bundleAffinity: 72, preferredDaypart: "Lunch",
     channels: ["App push", "SMS"], offerStyle: "Fast lunch combo, time-window",
@@ -114,7 +114,7 @@ export interface PromoDef {
 export const promos: PromoDef[] = [
   { id: "bundle", name: "Bundle Combo", description: "Hero item + side + drink", baseUplift: 72, marginImpact: -6, hero: teaCombo },
   { id: "percent-off", name: "% Off Hero", description: "Direct discount on signature", baseUplift: 62, marginImpact: -10, hero: signature },
-  { id: "bogo", name: "Buy One Get One", description: "BOGO on selected items", baseUplift: 84, marginImpact: -14, hero: burger },
+  { id: "bogo", name: "Buy One Get One", description: "BOGO on selected items", baseUplift: 84, marginImpact: -14, hero: porkChop },
   { id: "combo-upsell", name: "Combo Upsell", description: "+HKD add-on to enter combo", baseUplift: 58, marginImpact: -3, hero: curry },
   { id: "time-window", name: "Time-Window Deal", description: "Discount within daypart", baseUplift: 66, marginImpact: -7, hero: breakfast },
   { id: "loyalty", name: "Loyalty Boost", description: "2× stamps for members", baseUplift: 54, marginImpact: -4, hero: family },
@@ -137,8 +137,8 @@ export interface PresetDef {
 
 export const presets: PresetDef[] = [
   { id: "breakfast-value", name: "Breakfast Value Push", description: "Traffic booster before 10am", segment: "breakfast-regulars", promo: "time-window", depth: 15, horizon: 14, weather: false, holiday: false, pressure: "medium", hero: breakfast, daypart: "Breakfast" },
-  { id: "tea-combo", name: "Tea Combo Upsell", description: "Youth-driven afternoon uplift", segment: "young-adults", promo: "combo-upsell", depth: 12, horizon: 14, weather: false, holiday: false, pressure: "medium", hero: teaCombo, daypart: "Tea" },
-  { id: "youth-bundle", name: "Youth Bundle Campaign", description: "Bundle-first weekend push", segment: "young-adults", promo: "bundle", depth: 18, horizon: 28, weather: false, holiday: true, pressure: "high", hero: burger, daypart: "Tea" },
+  { id: "tea-combo", name: "Tea Combo Upsell", description: "Student-driven afternoon uplift", segment: "young-adults", promo: "combo-upsell", depth: 12, horizon: 14, weather: false, holiday: false, pressure: "medium", hero: teaCombo, daypart: "Tea" },
+  { id: "youth-bundle", name: "Student Bundle Campaign", description: "Bundle-first weekend push", segment: "young-adults", promo: "bundle", depth: 18, horizon: 28, weather: false, holiday: true, pressure: "high", hero: porkChop, daypart: "Tea" },
   { id: "weekend-family", name: "Weekend Family Set", description: "Sharing sets for dinner traffic", segment: "family-dinner", promo: "bundle", depth: 14, horizon: 14, weather: true, holiday: true, pressure: "medium", hero: family, daypart: "Dinner" },
   { id: "hero-recovery", name: "Hero Product Recovery", description: "Re-engage lapsed hero fans", segment: "hero-fans", promo: "loyalty", depth: 10, horizon: 28, weather: false, holiday: false, pressure: "low", hero: signature, daypart: "Dinner" },
   { id: "lunch-booster", name: "Lunch Traffic Booster", description: "Office lunch daypart optimizer", segment: "office-lunch", promo: "time-window", depth: 12, horizon: 7, weather: false, holiday: false, pressure: "medium", hero: curry, daypart: "Lunch" },
@@ -156,7 +156,7 @@ export interface ProductDef {
 export const products: ProductDef[] = [
   { id: "curry-brisket", name: "Curry Beef Brisket", image: curry, category: "Signature", weeklyUnits: 12480, trend: 8.2 },
   { id: "signature-rice", name: "Signature Char Siu Rice", image: signature, category: "Signature", weeklyUnits: 10240, trend: 4.1 },
-  { id: "zinger-combo", name: "Crispy Chicken Combo", image: burger, category: "Bundle", weeklyUnits: 8940, trend: 12.6 },
+  { id: "zinger-combo", name: "Baked Pork Chop Combo", image: porkChop, category: "Bundle", weeklyUnits: 8940, trend: 12.6 },
   { id: "tea-combo", name: "Tea-Time Combo", image: teaCombo, category: "Combo", weeklyUnits: 7620, trend: 6.8 },
   { id: "breakfast-set", name: "HK Breakfast Set", image: breakfast, category: "Daypart", weeklyUnits: 6810, trend: -2.4 },
   { id: "family-set", name: "Family Sharing Set", image: family, category: "Bundle", weeklyUnits: 4290, trend: 15.4 },
@@ -185,7 +185,7 @@ export const campaigns: CampaignDef[] = [
   { id: "c-tea-01", name: "Tea Combo Upsell — Wk 42", status: "live", image: teaCombo,
     segment: "young-adults", promo: "combo-upsell", uplift: 18.4, incremental: 284, confidence: 84,
     reach: 22400, storeCoverage: 62, window: "Live · 6 days remaining",
-    summary: "Combo upsell converting well among young adults in urban stores.",
+    summary: "Combo upsell converting well among students in urban stores.",
     worked: "App-push CTR 3.1× baseline; combo attach rate +22%.",
     watch: "Redemption dips in Sha Tin — cluster is less price-sensitive." },
   { id: "c-fam-02", name: "Weekend Family Set", status: "live", image: family,
@@ -212,10 +212,10 @@ export const campaigns: CampaignDef[] = [
     summary: "Re-engaged lapsed hero fans with 2× stamps + category bundle.",
     worked: "Reactivation 21% among 60-day inactive members.",
     watch: "Effect decays after week 2 — pair with a fresh combo." },
-  { id: "c-youth-06", name: "Youth Bundle Weekend", status: "past", image: burger,
+  { id: "c-youth-06", name: "Student Bundle Weekend", status: "past", image: porkChop,
     segment: "young-adults", promo: "bundle", uplift: 19.6, incremental: 318, confidence: 76,
     reach: 18800, storeCoverage: 100, window: "Ended · 6 weeks ago",
-    summary: "Bundle for young adults strong at MK & CWB, weaker in TKO.",
+    summary: "Bundle for students strong at MK & CWB, weaker in TKO.",
     worked: "Bundle attach 41%; social share drove new user acquisition.",
     watch: "TKO under-performed — de-prioritize in cluster next round." },
 ];
