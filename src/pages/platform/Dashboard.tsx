@@ -3,6 +3,7 @@ import { usePlatform } from "@/lib/platform/context";
 import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
 import { presets, products, IMG } from "@/lib/platform/data";
 import { DollarSign, TrendingUp, Target, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { fmtHKD, fmtHKDFromK } from "@/lib/platform/format";
 
 export default function Dashboard() {
   const { sim, scenario, applyPreset } = usePlatform();
