@@ -5,6 +5,7 @@ import { SectionHeader, DriverBar, ConfidenceMeter, RiskBadge, StatusChip, KpiTi
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis, LabelList } from "recharts";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 export default function DecisionAnalysis() {
   const { scenario, sim } = usePlatform();
