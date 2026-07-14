@@ -110,7 +110,7 @@ export default function DecisionAnalysis() {
             <Slider value={[altDepth]} onValueChange={([v]) => setAltDepth(v)} min={0} max={35} step={1} />
             <div className="grid grid-cols-2 gap-2 mt-4">
               <KpiTile label="Uplift Δ" value={`${(alt.uplift - sim.uplift >= 0 ? "+" : "")}${(alt.uplift - sim.uplift).toFixed(1)}%`} tone={alt.uplift >= sim.uplift ? "success" : "default"} />
-              <KpiTile label="Incremental Δ" value={`${deltaIncremental >= 0 ? "+" : ""}HKD ${deltaIncremental}K`} tone={deltaIncremental >= 0 ? "primary" : "default"} />
+              <KpiTile label="Incremental Δ" value={`${deltaIncremental >= 0 ? "+" : "−"}${fmtHKDFromK(Math.abs(deltaIncremental))}`} tone={deltaIncremental >= 0 ? "primary" : "default"} />
               <KpiTile label="Confidence Δ" value={`${(alt.confidence - sim.confidence >= 0 ? "+" : "")}${alt.confidence - sim.confidence}pp`} />
               <KpiTile label="Margin Δ" value={`${(deltaMargin >= 0 ? "+" : "")}${deltaMargin}pp`} tone={deltaMargin < -8 ? "warning" : "default"} />
             </div>
