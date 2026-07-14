@@ -5,6 +5,7 @@ import { SectionHeader, DriverBar, ConfidenceMeter, RiskBadge, StatusChip, KpiTi
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis, LabelList } from "recharts";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 export default function DecisionAnalysis() {
   const { scenario, sim } = usePlatform();
@@ -70,7 +71,7 @@ export default function DecisionAnalysis() {
               <ScatterChart margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis type="number" dataKey="risk" name="Risk" domain={[0, 60]} stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Risk (lower is better)", position: "insideBottom", offset: -2, fontSize: 11 }} />
-                <YAxis type="number" dataKey="impact" name="Incremental" stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Incremental HKD (K)", angle: -90, position: "insideLeft", fontSize: 11 }} />
+                <YAxis type="number" dataKey="impact" name="Incremental" stroke="hsl(var(--muted-foreground))" fontSize={11} label={{ value: "Incremental HKD (thousands)", angle: -90, position: "insideLeft", fontSize: 11 }} />
                 <ZAxis type="number" dataKey="z" range={[80, 400]} name="Uplift" />
                 <Tooltip
                   cursor={{ strokeDasharray: "3 3" }}
@@ -82,7 +83,7 @@ export default function DecisionAnalysis() {
                       <div className="rounded-lg border border-border bg-card shadow-lg p-2.5 text-xs">
                         <div className="font-semibold text-foreground mb-1">{d.name}</div>
                         <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 tabular-nums">
-                          <span className="text-muted-foreground">Incremental</span><span className="text-right font-medium">HKD {d.impact}K</span>
+                          <span className="text-muted-foreground">Incremental</span><span className="text-right font-medium">{fmtHKDFromK(d.impact)}</span>
                           <span className="text-muted-foreground">Risk score</span><span className="text-right font-medium">{d.risk}</span>
                           <span className="text-muted-foreground">Uplift</span><span className="text-right font-medium">+{d.z}%</span>
                         </div>
@@ -109,7 +110,7 @@ export default function DecisionAnalysis() {
             <Slider value={[altDepth]} onValueChange={([v]) => setAltDepth(v)} min={0} max={35} step={1} />
             <div className="grid grid-cols-2 gap-2 mt-4">
               <KpiTile label="Uplift Δ" value={`${(alt.uplift - sim.uplift >= 0 ? "+" : "")}${(alt.uplift - sim.uplift).toFixed(1)}%`} tone={alt.uplift >= sim.uplift ? "success" : "default"} />
-              <KpiTile label="Incremental Δ" value={`${deltaIncremental >= 0 ? "+" : ""}HKD ${deltaIncremental}K`} tone={deltaIncremental >= 0 ? "primary" : "default"} />
+              <KpiTile label="Incremental Δ" value={`${deltaIncremental >= 0 ? "+" : "−"}${fmtHKDFromK(Math.abs(deltaIncremental))}`} tone={deltaIncremental >= 0 ? "primary" : "default"} />
               <KpiTile label="Confidence Δ" value={`${(alt.confidence - sim.confidence >= 0 ? "+" : "")}${alt.confidence - sim.confidence}pp`} />
               <KpiTile label="Margin Δ" value={`${(deltaMargin >= 0 ? "+" : "")}${deltaMargin}pp`} tone={deltaMargin < -8 ? "warning" : "default"} />
             </div>
@@ -129,7 +130,7 @@ export default function DecisionAnalysis() {
                 <tr className="text-xs text-muted-foreground uppercase border-b border-border">
                   <th className="text-left py-2">Depth</th>
                   <th className="text-right py-2 px-2">Uplift</th>
-                  <th className="text-right py-2 px-2">Incremental (HKD K)</th>
+                  <th className="text-right py-2 px-2">Incremental</th>
                   <th className="text-right py-2 px-2">Confidence</th>
                   <th className="text-right py-2 px-2">Margin</th>
                 </tr>
@@ -139,7 +140,7 @@ export default function DecisionAnalysis() {
                   <tr key={r.depth} className={`border-b border-border/60 ${r.depth === scenario.depth ? "bg-primary/5 font-semibold" : ""}`}>
                     <td className="py-2">{r.depth}%{r.depth === scenario.depth && <span className="ml-2 text-[10px] text-primary">CURRENT</span>}</td>
                     <td className="py-2 px-2 text-right tabular-nums">+{r.uplift}%</td>
-                    <td className="py-2 px-2 text-right tabular-nums">{r.incremental}</td>
+                    <td className="py-2 px-2 text-right tabular-nums">{fmtHKDFromK(r.incremental)}</td>
                     <td className="py-2 px-2 text-right tabular-nums">{r.confidence}%</td>
                     <td className="py-2 px-2 text-right tabular-nums">{r.margin}</td>
                   </tr>

@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { fmtHKD, fmtHKDFromK } from "@/lib/platform/format";
 
 export default function Prediction() {
   const { scenario, setScenario, applyPreset, sim } = usePlatform();
@@ -16,7 +17,7 @@ export default function Prediction() {
         eyebrow="Sales forecasting"
         title="Sales Prediction"
         subtitle="Model expected sales, uplift, and risk under different promotion scenarios."
-        takeaway={<>Current scenario projects <b className="text-primary">+{sim.uplift}% uplift</b> and <b className="text-primary">HKD {sim.incremental}K incremental</b> over {scenario.horizon} days — confidence {sim.confidence}%, {sim.risk.toLowerCase()} risk.</>}
+        takeaway={<>Current scenario projects <b className="text-primary">+{sim.uplift}% uplift</b> and <b className="text-primary">{fmtHKDFromK(sim.incremental)} incremental</b> over {scenario.horizon} days — confidence {sim.confidence}%, {sim.risk.toLowerCase()} risk.</>}
         meta={<><RiskBadge risk={sim.risk} /><StatusChip tone="primary">{seg.name}</StatusChip></>}
         action={
           <div className="hidden md:flex flex-wrap gap-1.5 max-w-md justify-end">
@@ -33,8 +34,8 @@ export default function Prediction() {
 
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiTile tone="primary" label="Predicted weekly" value={`HKD ${(sim.predictedWeekly/1000).toFixed(0)}K`} delta={sim.uplift} />
-        <KpiTile tone="success" label="Incremental" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day`} />
+        <KpiTile tone="primary" label="Predicted weekly" value={fmtHKD(sim.predictedWeekly)} delta={sim.uplift} />
+        <KpiTile tone="success" label="Incremental" value={fmtHKDFromK(sim.incremental)} sub={`${scenario.horizon}-day`} />
         <KpiTile tone="info" label="Confidence" value={`${sim.confidence}%`} />
         <KpiTile tone="warning" label="Margin quality" value={`${sim.margin}`} sub="index / 100" />
       </div>

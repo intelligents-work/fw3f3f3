@@ -5,6 +5,7 @@ import { segments } from "@/lib/platform/data";
 import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard } from "@/components/platform/primitives";
 import { Sparkles, Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 export default function PromotionEngine() {
   const { scenario, setScenario, sim } = usePlatform();
@@ -23,7 +24,7 @@ export default function PromotionEngine() {
         eyebrow="Promotion planning"
         title="Promo Recommendation"
         subtitle={`Three ranked options for ${seg.name} at ${scenario.depth}% depth, with the top pick highlighted.`}
-        takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and HKD {top.sim.incremental}K incremental. Launch first in {launchFirst}.</>}
+        takeaway={<><b className="text-primary">{top.promo.name}</b> ranks #1 with <b className="text-primary">+{top.sim.uplift}% uplift</b> and {fmtHKDFromK(top.sim.incremental)} incremental. Launch first in {launchFirst}.</>}
         meta={<><RiskBadge risk={top.sim.risk} /><StatusChip tone="primary">Recommended</StatusChip></>}
         action={
           <button onClick={applySelected} className="btn-fairwood text-sm">
@@ -82,7 +83,7 @@ export default function PromotionEngine() {
                     </div>
                     <div className={cn("relative rounded-lg min-w-0", isTop ? "p-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 bg-muted/50")}>
                       <div className="text-[10px] uppercase tracking-wide text-muted-foreground leading-none mb-1">Incremental</div>
-                      <div className={cn("font-bold text-primary tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>HKD {r.sim.incremental}K</div>
+                      <div className={cn("font-bold text-primary tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>{fmtHKDFromK(r.sim.incremental)}</div>
                     </div>
                   </div>
                   <div className="space-y-2">

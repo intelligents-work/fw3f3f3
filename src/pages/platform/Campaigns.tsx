@@ -3,6 +3,7 @@ import { campaigns, type CampaignDef } from "@/lib/platform/data";
 import { SectionHeader, StatusChip, ConfidenceMeter, KpiTile, PageHeader } from "@/components/platform/primitives";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { cn } from "@/lib/utils";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 const filters = ["All", "Live", "Recent", "Past"] as const;
 
@@ -26,7 +27,7 @@ export default function Campaigns() {
         eyebrow="Campaign Performance · Review"
         title="Campaign Performance"
         subtitle="Live and recent campaigns with uplift, incremental revenue, and management summary."
-        takeaway={<><b className="text-primary">{bestLive.name}</b> is the top live performer at <b className="text-primary">+{bestLive.uplift}%</b> uplift and HKD {bestLive.incremental}K incremental across {bestLive.storeCoverage}% of stores.</>}
+        takeaway={<><b className="text-primary">{bestLive.name}</b> is the top live performer at <b className="text-primary">+{bestLive.uplift}%</b> uplift and {fmtHKDFromK(bestLive.incremental)} incremental across {bestLive.storeCoverage}% of stores.</>}
         meta={<><StatusChip tone="success">{campaigns.filter(c => c.status === "live").length} live</StatusChip><StatusChip tone="neutral">{campaigns.length} total</StatusChip></>}
         action={
           <div className="flex gap-1 bg-muted/60 p-1 rounded-full">
@@ -56,7 +57,7 @@ export default function Campaigns() {
                 <div className="text-sm font-semibold truncate">{c.name}</div>
                 <div className="flex gap-3 mt-1 text-xs">
                   <span className="font-bold text-[hsl(145_63%_36%)]">+{c.uplift}%</span>
-                  <span className="text-primary font-semibold">HKD {c.incremental}K</span>
+                  <span className="text-primary font-semibold">{fmtHKDFromK(c.incremental)}</span>
                   <span className="text-muted-foreground">{c.confidence}% conf</span>
                 </div>
                 <div className="text-[11px] text-muted-foreground mt-1 line-clamp-2">{c.summary}</div>
@@ -82,7 +83,7 @@ export default function Campaigns() {
             <div className="p-5">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
                 <KpiTile label="Uplift" value={`+${selected.uplift}%`} tone="success" />
-                <KpiTile label="Incremental" value={`HKD ${selected.incremental}K`} tone="primary" />
+                <KpiTile label="Incremental" value={fmtHKDFromK(selected.incremental)} tone="primary" />
                 <KpiTile label="Reach" value={`${(selected.reach/1000).toFixed(1)}K`} />
                 <KpiTile label="Coverage" value={`${selected.storeCoverage}%`} />
               </div>

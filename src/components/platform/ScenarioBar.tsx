@@ -3,6 +3,7 @@ import { stores, segments, promos, presets } from "@/lib/platform/data";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Zap } from "lucide-react";
+import { fmtHKDFromK } from "@/lib/platform/format";
 
 export function ScenarioBar() {
   const { scenario, setScenario, applyPreset, sim } = usePlatform();
@@ -79,7 +80,7 @@ export function ScenarioBar() {
         <div className="hidden lg:flex items-center gap-1.5 ml-auto xl:ml-2 pl-3 border-l border-border">
           <div className="text-right leading-tight">
             <div className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Live projection</div>
-            <div className="text-xs font-bold text-primary tabular-nums">+{sim.uplift}% · HKD {sim.incremental}K</div>
+            <div className="text-xs font-bold text-primary tabular-nums">+{sim.uplift}% · {fmtHKDFromK(sim.incremental)}</div>
           </div>
         </div>
       </div>

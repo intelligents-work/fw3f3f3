@@ -3,6 +3,7 @@ import { usePlatform } from "@/lib/platform/context";
 import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
 import { presets, products, IMG } from "@/lib/platform/data";
 import { DollarSign, TrendingUp, Target, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { fmtHKD, fmtHKDFromK } from "@/lib/platform/format";
 
 export default function Dashboard() {
   const { sim, scenario, applyPreset } = usePlatform();
@@ -46,9 +47,9 @@ export default function Dashboard() {
 
       {/* Big KPI moments — the four numbers management cares about */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiTile tone="primary" label={`Predicted sales · ${scenario.horizon} days`} value={`HKD ${(sim.predictedWeekly / 1000).toFixed(0)}K`} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
+        <KpiTile tone="primary" label={`Predicted sales · ${scenario.horizon} days`} value={fmtHKD(sim.predictedWeekly)} delta={sim.uplift} sub="vs baseline" icon={<DollarSign className="w-4 h-4" />} />
         <KpiTile tone="success" label="Expected uplift" value={`+${sim.uplift}%`} sub={`${sim.risk.toLowerCase()} risk`} icon={<TrendingUp className="w-4 h-4" />} />
-        <KpiTile tone="warning" label="Incremental revenue" value={`HKD ${sim.incremental}K`} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
+        <KpiTile tone="warning" label="Incremental revenue" value={fmtHKDFromK(sim.incremental)} sub={`${scenario.horizon}-day horizon`} icon={<ArrowUpRight className="w-4 h-4" />} />
         <KpiTile tone="info" label="Forecast confidence" value={`${sim.confidence}%`} sub={`Margin quality ${Math.round(sim.margin)}/100`} icon={<Target className="w-4 h-4" />} />
       </div>
 
@@ -73,7 +74,7 @@ export default function Dashboard() {
                   <div className="text-sm font-semibold text-foreground">{p.name}</div>
                   <div className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{p.description}</div>
                   <div className="flex items-center gap-2 mt-2 text-xs">
-                    <span className="font-bold text-primary">+HKD {(180 + i * 60)}K</span>
+                    <span className="font-bold text-primary">+{fmtHKDFromK(180 + i * 60)}</span>
                     <span className="text-muted-foreground">· {p.daypart}</span>
                   </div>
                 </div>
