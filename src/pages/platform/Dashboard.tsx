@@ -39,7 +39,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="hidden md:block relative">
-            <img src={IMG.family} alt="Weekend family set" className="absolute inset-0 w-full h-full object-cover" loading="eager" width={1024} height={1024} />
+            <img src={IMG.diners} alt="Fairwood diners in Hong Kong" className="absolute inset-0 w-full h-full object-cover" loading="eager" width={1024} height={1024} />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-primary/50" />
           </div>
         </div>
