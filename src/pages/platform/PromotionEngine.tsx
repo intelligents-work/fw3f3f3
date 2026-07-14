@@ -83,7 +83,7 @@ export default function PromotionEngine() {
                     </div>
                     <div className={cn("relative rounded-lg min-w-0", isTop ? "p-3 bg-primary/5 ring-1 ring-primary/15" : "p-2 bg-muted/50")}>
                       <div className="text-[10px] uppercase tracking-wide text-muted-foreground leading-none mb-1">Incremental</div>
-                      <div className={cn("font-bold text-primary tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>HKD {r.sim.incremental}K</div>
+                      <div className={cn("font-bold text-primary tabular-nums leading-tight", isTop ? "text-2xl" : "text-base")}>{fmtHKDFromK(r.sim.incremental)}</div>
                     </div>
                   </div>
                   <div className="space-y-2">
