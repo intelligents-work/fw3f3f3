@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePlatform } from "@/lib/platform/context";
-import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard, DemoTag } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, StatusChip, RiskBadge, ConfidenceMeter, CardLink, VerdictChip, PriorityCard } from "@/components/platform/primitives";
 import { presets, products, IMG } from "@/lib/platform/data";
 import { DollarSign, TrendingUp, Target, ArrowUpRight, ShieldCheck } from "lucide-react";
 

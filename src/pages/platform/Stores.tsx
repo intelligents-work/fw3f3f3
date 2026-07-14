@@ -1,6 +1,6 @@
 import { stores } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, VerdictChip, PageHeader, DemoTag } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, VerdictChip, PageHeader } from "@/components/platform/primitives";
 import { cn } from "@/lib/utils";
 
 const metrics: { key: keyof typeof stores[0]; label: string; format?: (n: number) => string }[] = [

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { segments, type SegmentDef } from "@/lib/platform/data";
 import { usePlatform } from "@/lib/platform/context";
-import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader, DemoTag } from "@/components/platform/primitives";
+import { SectionHeader, StatusChip, ConfidenceMeter, PageHeader } from "@/components/platform/primitives";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from "recharts";
 import { cn } from "@/lib/utils";
 

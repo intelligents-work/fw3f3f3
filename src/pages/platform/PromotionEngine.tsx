@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePlatform } from "@/lib/platform/context";
 import { rankPromos } from "@/lib/platform/engine";
 import { segments } from "@/lib/platform/data";
-import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard, DemoTag } from "@/components/platform/primitives";
+import { KpiTile, SectionHeader, ConfidenceMeter, RiskBadge, StatusChip, VerdictChip, PageHeader, PriorityCard } from "@/components/platform/primitives";
 import { Sparkles, Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
